@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8"/>
+    <title>MyAnimeGo</title>
+    <link rel="icon" type="image/svg+xml" href="/icon.svg?v=rss"/>
+    <link rel="alternate icon" href="/favicon.ico?v=rss"/>
+    <link rel="apple-touch-icon" href="/icon-256.png?v=rss"/>
+    <link rel="manifest" href="/manifest.json" crossorigin="use-credentials"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" id="themeColorMeta" content="#1e1e1e">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="基于 RSS 的番剧订阅与 Transmission 下载管理"/>
+</head>
+<script>
+    // 首屏沿用本机主题偏好，避免样式加载后闪烁。
+    (() => {
+        let mode = 'dark';
+        try { mode = localStorage.getItem('ani-rss-theme') || 'dark'; } catch {}
+        const dark = mode === 'auto' ? matchMedia('(prefers-color-scheme: dark)').matches : mode !== 'light';
+        document.documentElement.classList.toggle('dark', dark);
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+    })();
+    (() => {
+        if (location.pathname.endsWith('/')) {
+            return;
+        }
+        location.pathname += '/'
+    })()
+</script>
+<body>
+<div id="app"></div>
+<script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

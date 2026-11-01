@@ -1,0 +1,31 @@
+{
+  "short_name": "MyAnimeGo",
+  "name": "MyAnimeGo",
+  "icons": [
+    {
+      "src": "/icon.svg?v=rss",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-128.png?v=rss",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-256.png?v=rss",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png?v=rss",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#1e1e1e",
+  "theme_color": "#1e1e1e"
+}

@@ -1,0 +1,7 @@
+{
+  "downloadToolType": "Transmission",
+  "rssSleepMinutes": 15,
+  "renameSleepSeconds": 60,
+  "rename": true,
+  "rss": true
+}

@@ -1,0 +1,7 @@
+{
+  "download": "Transmission",
+  "sleep": 15,
+  "renameSleep": 1,
+  "rename": true,
+  "rss": true
+}

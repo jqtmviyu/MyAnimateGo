@@ -1,0 +1,23 @@
+[
+  {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "url": "https://example.invalid/rss/main.xml",
+    "backRss": [
+      "https://example.invalid/rss/standby.xml"
+    ],
+    "title": "合成番剧",
+    "offset": 0,
+    "year": 2025,
+    "month": 4,
+    "season": 1,
+    "subgroup": "主字幕组",
+    "match": [],
+    "exclude": [],
+    "globalExclude": false,
+    "ova": false,
+    "enable": true,
+    "currentEpisodeNumber": 2,
+    "totalEpisodeNumber": 12,
+    "type": "other"
+  }
+]

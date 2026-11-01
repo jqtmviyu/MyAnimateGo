@@ -1,0 +1,27 @@
+# 运行数据与本机配置
+/backend/data/
+/backend/bin/
+/backend/internal/webui/licenses/
+/backend/.env*
+/config.local/
+/example.local/
+/.scratch/
+AGENTS.local.md
+*.log
+.DS_Store
+
+# 前端依赖与构建产物
+node_modules/
+.pnpm-store/
+/frontend/node/
+dist/
+
+# 开发工具
+.idea/
+.vscode/
+*.iml
+
+# 本地文档与代理工作流
+/docs/
+/AGENTS.md
+/GLOSSARY.md

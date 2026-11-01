@@ -1,0 +1,24 @@
+<script setup>
+import {Folder,PenLine,RefreshCw,ChevronLeft,ChevronRight} from '@lucide/vue'
+import RenameRules from './RenameRules.vue'
+import RenameDirectoryEditor from './RenameDirectoryEditor.vue'
+import RenamePreviewTable from './RenamePreviewTable.vue'
+import {useRenameSession} from './rename-session'
+import './rename.css'
+const props=defineProps({modelValue:Boolean,task:Object,directory:{type:String,default:''},request:Function,demo:Boolean})
+const emit=defineEmits(['update:modelValue','changed','directory-renamed'])
+const {root,rules,results,loading,busy,failure,filter,page,directories,editing,ready,selected,selectedSet,allSelected,visible,pages,rows,conflicts,finished,stale,canApply,close,editDirectory,cancelDirectory,updateDirectoryName,toggle,selectAll,changeMode,preview,saveDirectory,apply}=useRenameSession(props,emit)
+const filters=[{key:'changes',label:'待核对'},{key:'all',label:'全部文件'},{key:'problems',label:'有问题'},{key:'folders',label:'目录'}]
+</script>
+<template>
+ <AppModal :model-value="modelValue" title="重命名" width="1120px" class="transmission-rename-dialog" :show-close="!busy" :close-on-click-modal="false" :close-on-press-escape="!busy" @update:model-value="!$event&&close()">
+  <div class="rename-context"><div><Folder :size="17"/><span :title="root">{{ root }}</span><button class="rename-root-rename" :disabled="busy" @click="filter='folders';editDirectory(root)"><PenLine :size="14"/>修改目录名</button><small v-if="demo">模拟数据</small></div><div v-if="filter!=='folders'" class="rename-operation"><label>方式</label><AppSelect :model-value="rules.mode" :disabled="busy" aria-label="命名方式" @update:model-value="changeMode"><AppOption value="episode" label="按剧集命名"/><AppOption value="replace" label="正则替换"/></AppSelect></div></div>
+  <div v-if="filter!=='folders'" class="rename-rule-area"><RenameRules :rules="rules" :directories="directories" :disabled="busy"/></div>
+  <div class="rename-preview-toolbar"><div class="rename-filters"><button v-for="item in filters" :key="item.key" :aria-pressed="filter===item.key" :disabled="busy" @click="filter=item.key">{{ item.label }}<span v-if="item.key==='problems'&&conflicts">{{ conflicts }}</span></button></div><span class="rename-live-status">{{ results?`已完成 ${finished} / ${results.length}`:loading?'正在更新…':`${ready.length} 项可修改` }}</span><button class="rename-icon-button" title="刷新预览" aria-label="刷新重命名预览" :disabled="busy" @click="preview"><RefreshCw :size="16" :class="{'is-spinning':loading}"/></button></div>
+  <RenamePreviewTable v-if="filter!=='folders'" :rows="rows" :chosen="selectedSet" :busy="busy||stale||!!editing.path" :results="!!results" :all-chosen="allSelected" :partly-chosen="selected.length>0&&!allSelected" :editing-path="editing.path" :directory-name="editing.name" :new-directory-path="editing.newPath" :directory-error="editing.error" :directory-busy="busy" :can-rename-directory="editing.canSave" @toggle="toggle" @all="selectAll" @update:directory-name="updateDirectoryName" @rename-directory="editDirectory" @save-directory="saveDirectory" @cancel-directory="cancelDirectory"/>
+  <div v-else class="rename-directory-list"><div class="rename-directory-list-heading">选择任意目录改名，内部文件名保持原样</div><div v-for="path in directories" :key="path" class="rename-directory-list-row"><div class="rename-folder-heading"><Folder :size="15"/><span>{{ path }}</span><button :disabled="busy" @click="editDirectory(path)"><PenLine :size="14"/>修改目录名</button></div><RenameDirectoryEditor v-if="editing.path===path" :name="editing.name" :path="path" :new-path="editing.newPath" :error="editing.error" :busy="busy" :can-save="editing.canSave" @update:name="updateDirectoryName" @save="saveDirectory" @cancel="cancelDirectory"/></div></div>
+  <div v-if="filter!=='folders'" class="rename-page-bar"><span>{{ visible.length }} 个文件<span v-if="conflicts"> · 冲突项自动跳过</span></span><button :disabled="page<=1||busy" aria-label="上一页" @click="page--"><ChevronLeft :size="16"/></button><span>{{ page }} / {{ pages }}</span><button :disabled="page>=pages||busy" aria-label="下一页" @click="page++"><ChevronRight :size="16"/></button></div>
+  <p v-if="failure" class="rename-message error" role="alert">{{ failure }}</p><p v-if="busy" class="rename-message" role="status">正在处理重命名，请保持此窗口打开…</p>
+  <template #footer><span class="rename-footer-summary">{{ editing.path?'先保存或取消目录名称修改':filter==='folders'?'修改目录后，文件预览自动更新':results?`已完成 ${finished} 个文件`:`已选择 ${selected.length} 个文件` }}<small v-if="selected.length>500">每次最多执行 500 项</small></span><AppButton :disabled="busy" @click="close">{{ results?'关闭':'取消' }}</AppButton><template v-if="filter!=='folders'"><AppButton v-if="results" type="primary" :disabled="busy" @click="preview">重新预览</AppButton><AppButton v-else type="primary" :loading="busy" :disabled="!canApply" @click="apply">确认重命名</AppButton></template></template>
+ </AppModal>
+</template>

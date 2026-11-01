@@ -1,0 +1,260 @@
+@import "./settings.css";
+@layer theme, base, legacy, components, utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "vue-sonner/style.css" layer(components);
+@import "./style.css" layer(legacy);
+@import "./ext.css" layer(legacy);
+@import "./media-library.css";
+@import "./dialogs.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  color-scheme: dark;
+  --background: #1e1e1e;
+  --foreground: #eeeeee;
+  --card: #292929;
+  --card-foreground: #eeeeee;
+  --popover: #303030;
+  --popover-foreground: #eeeeee;
+  --primary: #52b54b;
+  --primary-foreground: #ffffff;
+  --secondary: #303030;
+  --secondary-foreground: #dddddd;
+  --muted: #2b2b2b;
+  --muted-foreground: #999999;
+  --accent: #2b3b26;
+  --accent-foreground: #9ad881;
+  --destructive: #ed7979;
+  --destructive-foreground: #ffffff;
+  --border: #353535;
+  --input: #373737;
+  --ring: #72c65d;
+  --radius: 0.4rem;
+  --control-height: 38px;
+  --control-radius: 6px;
+  --control-background: #ffffff0b;
+  --control-border: #ffffff18;
+  --success: #70bf55;
+  --warning: #d7ac57;
+  --primary-soft: color-mix(in srgb, var(--primary) 10%, transparent);
+  --primary-border: color-mix(in srgb, var(--primary) 35%, transparent);
+  --danger-soft: color-mix(in srgb, var(--destructive) 10%, transparent);
+  --danger-border: color-mix(in srgb, var(--destructive) 35%, transparent);
+  --success-soft: color-mix(in srgb, var(--success) 10%, transparent);
+  --success-border: color-mix(in srgb, var(--success) 35%, transparent);
+  --warning-soft: color-mix(in srgb, var(--warning) 10%, transparent);
+  --shadow-soft: 0 2px 8px #00000015;
+  --text-caption: 12px;
+  --motion-fast: .15s;
+  --sidebar: #282828;
+  --sidebar-foreground: #aaaaaa;
+  --sidebar-primary: #52b54b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2b3b26;
+  --sidebar-accent-foreground: #9ad881;
+  --sidebar-border: #333333;
+  --sidebar-ring: #72c65d;
+}
+
+/* 语义颜色同时供 CSS 与 Tailwind 使用，组件通过这些变量切换主题。 */
+:root {
+  --surface-hover: #ffffff0c;
+  --surface-raised: #ffffff10;
+  --surface-selected: #ffffff20;
+  --subtle-background: #ffffff04;
+  --text-secondary: #cccccc;
+  --text-subtle: #888888;
+  --strong-border: #929297;
+  --scrollbar-thumb: #ffffff30;
+  --scrollbar-hover: #ffffff60;
+  --nav-selected: #ffffff30;
+  --nav-selected-foreground: #ffffff;
+  --dialog-surface: #28282b;
+  --dialog-overlay: rgb(0 0 0 / .56);
+  --dialog-nested-overlay: rgb(0 0 0 / .28);
+  --dialog-border: #ffffff12;
+  --select-background: #414146b3;
+  --select-hover: #4b4b50bf;
+  --shadow-color: #00000040;
+  --media-foreground: #ffffff;
+  --media-overlay: #00000099;
+  --media-badge-background: #101113d9;
+  --rating: #d6b366;
+  --source-mikan: #e800a4;
+}
+:root:not(.dark) {
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #262626;
+  --card: #f5f5f5;
+  --card-foreground: #262626;
+  --popover: #ffffff;
+  --popover-foreground: #262626;
+  --secondary: #eeeeef;
+  --secondary-foreground: #363636;
+  --muted: #f1f1f2;
+  --muted-foreground: #686868;
+  --text-secondary: #4d4d4d;
+  --text-subtle: #717171;
+  --accent: #edf6eb;
+  --accent-foreground: #287623;
+  --destructive: #bf3535;
+  --border: #dedee1;
+  --input: #c8c8cc;
+  --control-background: #f1f1f2;
+  --control-border: #d7d7db;
+  --success: #2c7b27;
+  --warning: #936318;
+  --surface-hover: #00000007;
+  --surface-raised: #00000009;
+  --surface-selected: #00000010;
+  --subtle-background: #00000003;
+  --strong-border: #8c8c91;
+  --scrollbar-thumb: #00000040;
+  --scrollbar-hover: #00000070;
+  --nav-selected: #999999;
+  --nav-selected-foreground: #ffffff;
+  --sidebar: #f2f2f2;
+  --sidebar-foreground: #555555;
+  --sidebar-accent: #e5efe2;
+  --sidebar-accent-foreground: #287623;
+  --sidebar-border: #dddddf;
+  --dialog-surface: #ffffff;
+  --dialog-overlay: rgb(0 0 0 / .35);
+  --dialog-border: #dedee1;
+  --select-background: #eeeeef;
+  --select-hover: #e4e4e7;
+  --shadow-color: #0000001f;
+  --rating: #996a15;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-selected: var(--surface-selected);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-subtle: var(--text-subtle);
+  --color-media-foreground: var(--media-foreground);
+  --color-media-overlay: var(--media-overlay);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { font-size:14px; }
+  button:not(:disabled), [role="button"]:not([aria-disabled="true"]) { cursor:pointer; }
+  :focus-visible { outline:2px solid var(--ring); outline-offset:-2px; }
+}
+
+body { background:var(--background); color:var(--foreground); }
+#app { min-width:320px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior:auto !important; animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+}
+
+@layer base {
+  body { font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif; }
+}
+:root { --media-gutter: clamp(20px, 4vw, 72px); --poster-gap: clamp(18px, 1.25vw, 24px); }
+
+/* 滚动条沿用主题颜色，悬浮时提高滑块对比。 */
+html, body, #app * {
+  scrollbar-width:thin;
+  scrollbar-color:var(--scrollbar-thumb) transparent;
+}
+@supports selector(::-webkit-scrollbar) {
+  html, body, #app * {
+    scrollbar-width:auto;
+    scrollbar-color:auto;
+  }
+  ::-webkit-scrollbar { width:7px; height:7px; }
+  ::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background:transparent; }
+  ::-webkit-scrollbar-thumb {
+    background:var(--scrollbar-thumb);
+    border:2px solid transparent;
+    background-clip:padding-box;
+    border-radius:999px;
+  }
+  ::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:active { background-color:var(--scrollbar-hover); }
+  ::-webkit-scrollbar-button { display:none; width:0; height:0; }
+}
+
+/* 焦点高亮画在控件内部，贴近滚动或裁切容器时仍完整可见。 */
+:is(input:not([type=checkbox]):not([type=radio]),textarea,select,[data-slot=select-trigger]):not([data-focus-container] input):focus-visible {
+  outline:2px solid var(--ring);outline-offset:-2px;
+}
+
+/* 表单控件共用尺寸和表面，组合搜索框由自己的外壳负责。 */
+:is([data-slot=input],[data-slot=textarea]):not([data-focus-container] input),[data-slot=select-trigger],.app-static-input{
+  min-height:var(--control-height);border-radius:var(--control-radius);
+  background:var(--control-background);border:1px solid var(--control-border);
+  color:var(--foreground);font-size:14px;box-shadow:none;
+}
+[data-slot=input]:not([data-focus-container] input),[data-slot=select-trigger]{height:var(--control-height)}
+[data-slot=textarea]{padding:10px 12px;line-height:1.6}
+.app-number{width:220px;max-width:100%}
+.app-number>[data-slot=input]{flex:1;width:0;min-width:0}
+.app-number>[data-slot=button]{height:var(--control-height);width:var(--control-height)}
+@media(max-width:600px){:root{--control-height:40px}}
+
+/* 通知沿用主题表面，状态通过图标和边框表达。 */
+[data-sonner-toaster].toaster [data-sonner-toast][data-styled=true]{
+  min-height:52px;padding:14px 42px 14px 16px;border-radius:10px;
+  background:var(--popover);color:var(--foreground);border-color:var(--border);
+  box-shadow:0 8px 28px var(--shadow-color);font-size:13px;line-height:1.5;
+}
+[data-sonner-toaster].toaster [data-sonner-toast][data-type=success]{border-color:var(--primary-border)}
+[data-sonner-toaster].toaster [data-type=success] [data-icon]{color:var(--success)}
+[data-sonner-toaster].toaster [data-type=error] [data-icon]{color:var(--destructive)}
+[data-sonner-toaster].toaster [data-type=warning] [data-icon]{color:var(--warning)}
+[data-sonner-toaster].toaster [data-type=info] [data-icon]{color:var(--accent-foreground)}
+[data-sonner-toaster].toaster [data-sonner-toast] [data-close-button]{
+  inset:10px 10px auto auto;transform:none;background:transparent;
+  border:0;color:var(--muted-foreground);width:24px;height:24px;
+}
+[data-sonner-toaster].toaster [data-sonner-toast] [data-close-button]:hover{background:var(--secondary);color:var(--foreground)}
+
+/* 选择器参照 Emby：灰色表面、小圆角、平面选项列表。 */
+[data-slot=select-trigger]{background:var(--select-background);border:1px solid transparent;border-radius:4px;box-shadow:none}
+[data-slot=select-trigger]:hover{background:var(--select-hover)}
+[data-slot=select-content]{background:var(--card);border:1px solid var(--border);border-radius:6px;box-shadow:0 12px 32px var(--shadow-color)}
+.app-select-content{max-height:min(320px,var(--reka-select-content-available-height,320px))}
+[data-slot=select-viewport]{padding:4px}
+[data-slot=select-item]{min-height:36px;padding-block:8px;font-size:13px;border-radius:3px;color:var(--text-secondary);cursor:pointer}
+[data-slot=select-item][data-highlighted]{background:var(--surface-hover);color:var(--foreground);outline:none}
+[data-slot=select-item][data-state=checked]{color:var(--success)}
+.media-library-toolbar [data-slot=select-trigger]{height:36px;min-height:36px;font-size:12px}

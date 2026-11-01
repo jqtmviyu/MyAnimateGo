@@ -1,0 +1,137 @@
+.app-modal.transmission-rename-dialog[data-slot=dialog-content] {
+ height:min(790px,calc(100dvh - 80px));max-height:calc(100dvh - 80px);
+}
+.transmission-rename-dialog>.app-dialog-body {display:flex;flex-direction:column;padding:0;overflow:hidden;min-height:0}
+.transmission-rename-dialog>.app-dialog-footer {gap:10px;padding:16px 24px}
+.rename-context {display:flex;align-items:center;gap:24px;padding:18px 24px;border-bottom:1px solid var(--border);flex-shrink:0}
+.rename-context>div:first-child {display:flex;align-items:center;gap:10px;flex:1;min-width:0;color:var(--text-secondary);font-size:14px}
+.rename-context>div:first-child>span {overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rename-context>div:first-child>svg {flex-shrink:0;color:var(--success)}
+.rename-context small {color:var(--success);font-size:12px;white-space:nowrap}
+.rename-root-rename {display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--muted-foreground);font-size:12px;white-space:nowrap;padding:5px}
+.rename-root-rename:hover {color:var(--primary)}
+.rename-operation {display:flex;align-items:center;gap:12px;flex-shrink:0}
+.rename-operation>label {font-size:13px;color:var(--muted-foreground)}
+.rename-operation>.app-select {width:160px}
+.rename-rule-area {padding:18px 24px 0;flex-shrink:0;max-height:280px;overflow:auto;scrollbar-width:thin}
+.rename-fields {padding:0;border:0;margin:0;min-width:0}
+.rename-fields:disabled {opacity:.5;pointer-events:none}
+.rename-fields label:not(.app-checkbox) {display:block;font-size:14px;color:var(--text-secondary);margin-bottom:8px}
+.rename-main-fields {display:grid;gap:18px;min-width:0}
+.rename-main-fields.episode {grid-template-columns:minmax(180px,1fr) 96px minmax(220px,1.3fr)}
+.rename-main-fields.replace {grid-template-columns:1fr 1fr}
+.rename-main-fields>div {min-width:0}
+.rename-main-fields input[type=number] {width:100%;height:36px;padding:7px 10px;color:var(--foreground);border:1px solid var(--border);border-radius:6px;background:transparent;outline:none;font-size:14px}
+.rename-main-fields input[type=number]:focus {border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
+.rename-code input {font-family:ui-monospace,SFMono-Regular,monospace;font-size:13px}
+.rename-field-help {margin:10px 0 12px;color:var(--muted-foreground);font-size:13px;line-height:1.65}
+.rename-options {padding:0 0 12px}
+.rename-options summary {font-size:13px;color:var(--text-secondary);cursor:pointer;list-style:revert}
+.rename-options-body {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 24px;align-items:start;padding:16px 0 4px}
+.rename-directory-field {min-width:0}
+.rename-option-toggles {grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px;min-height:36px}
+.rename-options-body .app-checkbox {display:inline-flex;align-items:center;gap:8px;margin:0;line-height:1.5;font-size:14px;color:var(--text-secondary)}
+.rename-preview-toolbar {display:flex;align-items:center;gap:12px;padding:12px 24px 10px;flex-shrink:0;border-top:1px solid var(--border)}
+.rename-filters {display:flex;align-items:center;gap:18px}
+.rename-filters button {display:flex;align-items:center;gap:5px;padding:4px 0;border:0;background:none;color:var(--muted-foreground);font-size:13px}
+.rename-filters button[aria-pressed=true] {color:var(--foreground)}
+.rename-filters button span {color:var(--warning);font-size:12px}
+.rename-live-status {margin-left:auto;color:var(--muted-foreground);font-size:12px;white-space:nowrap}
+.rename-icon-button {display:flex;align-items:center;justify-content:center;background:none;border:0;color:var(--muted-foreground);padding:5px}
+.rename-table-scroll {flex:1;min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:var(--scrollbar-thumb) transparent;padding:0 24px}
+.rename-table {width:100%;table-layout:fixed;border-collapse:collapse;font-size:13px}
+.rename-table th {text-align:left;font-weight:400;color:var(--text-secondary);position:sticky;top:0;background:var(--dialog-surface);padding:11px 8px;z-index:2;white-space:nowrap;border-bottom:1px solid var(--border)}
+.rename-table td {padding:14px 8px;border-bottom:1px solid var(--border);vertical-align:middle;overflow-wrap:anywhere;line-height:1.65;color:var(--text-secondary)}
+.rename-table td:first-child {color:var(--primary)}
+.rename-table td:nth-child(3) {padding-left:2px;padding-right:2px;color:var(--text-subtle)}
+.rename-table td:nth-child(4) {color:var(--text-secondary)}
+.rename-table .rename-chosen td:nth-child(4) {color:var(--success)}
+.rename-table .rename-folder-row td {background:transparent;color:var(--text-secondary);padding:9px 8px;border-top:1px solid var(--border)}
+.rename-table :is(.rename-state-conflict,.rename-state-invalid,.rename-state-failed) td:nth-child(4) {color:var(--warning)}
+.rename-table td:last-child {font-size:12px;color:var(--muted-foreground)}
+.rename-table .rename-state-conflict td:last-child {color:var(--warning)}
+.rename-table small {display:block;color:var(--warning);margin-top:4px;font-size:12px}
+.rename-folder-heading {display:flex;align-items:center;gap:9px;font-size:13px;min-height:28px}
+.rename-folder-heading>span {overflow-wrap:anywhere}
+.rename-folder-heading>svg {flex-shrink:0;color:var(--success)}
+.rename-folder-heading>button {margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--muted-foreground);padding:5px 7px;font-size:12px;white-space:nowrap;border-radius:5px}
+.rename-folder-heading>button:hover {color:var(--primary);background:var(--surface-hover)}
+.rename-directory-list {flex:1;min-height:0;overflow:auto;padding:0 24px 20px;scrollbar-width:thin}
+.rename-directory-list-heading {padding:8px 0 15px;font-size:13px;color:var(--muted-foreground)}
+.rename-directory-list-row {padding:12px 0;border-top:1px solid var(--border)}
+.rename-inline-directory-editor {padding:14px 0 10px}
+.rename-inline-directory-editor>div {display:flex;align-items:center;gap:10px}
+.rename-inline-directory-editor>div>label {font-size:13px;color:var(--text-secondary);white-space:nowrap}
+.rename-inline-directory-editor .app-input {flex:1;min-width:100px;max-width:420px}
+.rename-inline-directory-editor p {font-size:12px;line-height:1.6;color:var(--muted-foreground);margin:10px 0 0;overflow-wrap:anywhere}
+.rename-inline-directory-editor p span {color:var(--success)}
+.rename-inline-directory-editor p.rename-directory-error {color:var(--warning)}
+.rename-page-bar {display:flex;align-items:center;gap:12px;color:var(--muted-foreground);font-size:12px;padding:10px 24px 12px;flex-shrink:0}
+.rename-page-bar>span:first-child {margin-right:auto}
+.rename-page-bar button {border:0;background:none;color:var(--text-secondary);display:flex;padding:5px}
+.rename-footer-summary {font-size:13px;color:var(--muted-foreground);margin-right:auto}
+.rename-footer-summary small {display:block;color:var(--warning);margin-top:4px}
+.rename-empty {padding:60px 24px;text-align:center;color:var(--muted-foreground);font-size:14px}
+.rename-message {font-size:13px;line-height:1.6;padding:10px 24px;margin:0;color:var(--success);flex-shrink:0}
+.rename-message.error {color:var(--warning)}
+.transmission-rename-dialog button:disabled {cursor:default}
+:is(.rename-page-bar,.rename-folder-heading,.rename-filters,.rename-root-rename) button:disabled {opacity:.35}
+@media(max-width:760px) {
+ .rename-main-fields.episode {grid-template-columns:minmax(0,1fr) 90px}
+ .rename-main-fields.episode>div:last-child {grid-column:1/-1}
+ .rename-rule-area {max-height:250px;padding:14px 16px 0}
+ .rename-context {flex-direction:column;align-items:stretch;padding:14px 16px;gap:12px}
+ .rename-table-scroll {padding:0 12px}
+ .rename-table {min-width:650px}
+ .rename-preview-toolbar {padding-inline:16px}
+ .rename-options-body {grid-template-columns:1fr}
+ .rename-inline-directory-editor>div {flex-wrap:wrap}
+ .rename-inline-directory-editor>div>label {width:100%}
+}
+@media(max-width:780px) {
+ .app-modal.transmission-rename-dialog[data-slot=dialog-content] {height:calc(100dvh - 16px);max-height:calc(100dvh - 16px)}
+ .transmission-rename-dialog>.app-dialog-body {display:block;overflow:auto}
+ .transmission-rename-dialog>.app-dialog-footer {padding:12px 16px;flex-wrap:wrap}
+ .rename-footer-summary {flex-basis:100%;margin:0}
+ .rename-context {flex-direction:column;align-items:stretch;padding:12px 16px;gap:10px}
+ .rename-context>div:first-child {flex-wrap:wrap}
+ .rename-context>div:first-child>span {flex:1;min-width:0}
+ .rename-root-rename {min-height:40px}
+ .rename-rule-area {max-height:none;overflow:visible;padding:14px 16px 0}
+ .rename-main-fields.replace,.rename-options-body {grid-template-columns:minmax(0,1fr)}
+ .rename-main-fields.episode {grid-template-columns:minmax(0,1fr) 80px}
+ .rename-main-fields.episode>div:last-child {grid-column:1/-1}
+ .rename-preview-toolbar {flex-wrap:wrap;gap:4px 12px;padding:8px 16px}
+ .rename-filters {width:100%;justify-content:space-between;gap:6px}
+ .rename-filters button {min-height:44px}
+ .rename-live-status {margin-left:0;margin-right:auto}
+ .rename-icon-button {min-width:44px;min-height:44px}
+ .rename-table-scroll {overflow:visible;padding:0 12px}
+ .rename-table,.rename-table tbody {display:block;width:100%;min-width:0}
+ .rename-table colgroup {display:none}
+ .rename-table thead {display:block;position:static}
+ .rename-table thead tr {display:block}
+ .rename-table th {position:static;border:0}
+ .rename-table th:not(:first-child) {display:none}
+ .rename-table th:first-child {display:flex;gap:12px;align-items:center;min-height:44px}
+ .rename-table th:first-child::after {content:'全选可修改文件';font-size:13px}
+ .rename-table tbody tr:not(.rename-folder-row) {display:grid;grid-template-columns:28px minmax(0,1fr) 60px;gap:6px 8px;padding:14px 0;border-bottom:1px solid var(--border)}
+ .rename-table tbody tr:not(.rename-folder-row)>td {min-width:0;padding:0;border:0}
+ .rename-table tbody tr:not(.rename-folder-row)>td:first-child {grid-column:1;grid-row:1 / span 2;padding:4px 0}
+ .rename-table tbody tr:not(.rename-folder-row)>td:nth-child(2) {grid-column:2;grid-row:1}
+ .rename-table tbody tr:not(.rename-folder-row)>td:nth-child(3) {display:none}
+ .rename-table tbody tr:not(.rename-folder-row)>td:nth-child(4) {grid-column:2 / -1;grid-row:2}
+ .rename-table tbody tr:not(.rename-folder-row)>td:nth-child(5) {grid-column:3;grid-row:1;text-align:right}
+ .rename-table tbody tr:not(.rename-folder-row)>td:nth-child(2)::before {content:'原名';display:block;font-size:12px;color:var(--muted-foreground)}
+ .rename-table tbody tr:not(.rename-folder-row)>td:nth-child(4)::before {content:'新名';display:block;font-size:12px;color:var(--muted-foreground)}
+ .rename-table .rename-folder-row,.rename-table .rename-folder-row>td {display:block}
+ .rename-folder-heading {flex-wrap:wrap;gap:6px}
+ .rename-folder-heading>span {flex:1;min-width:0}
+ .rename-folder-heading>button {min-height:44px}
+ .rename-directory-list {overflow:visible;padding:0 16px 16px}
+ .rename-inline-directory-editor>div {flex-wrap:wrap}
+ .rename-inline-directory-editor>div>label {width:100%}
+ .rename-inline-directory-editor .app-input {max-width:none;min-width:0;flex-basis:100%}
+ .rename-page-bar {padding-inline:16px;gap:8px}
+ .rename-page-bar button {min-width:40px;min-height:44px;align-items:center;justify-content:center}
+}

@@ -1,0 +1,59 @@
+.flex {
+    display:flex;
+}
+
+.flex-center {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.full-width {
+    width:100%;
+}
+
+.width-150 {
+    width:150px;
+}
+
+.width-200 {
+    width:200px;
+}
+
+.margin-top-4 {
+    margin-top:4px;
+}
+
+.spacer {
+    height:8px;
+    width:8px;
+}
+
+@media (min-width: 1000px) {
+    .auto-flex {
+        display:flex;
+    }
+}
+
+@media (max-width: 700px) {
+    .auto-button {
+        span {
+            display:none;
+        }
+    }
+}
+
+
+/* 隐藏滚动条 */
+.hide-scrollbar {
+    [data-slot="scroll-area-scrollbar"] {
+        display:none !important;
+    }
+}
+
+.tabs-center {
+    .app-tabs-list {
+        display:flex;
+        justify-content:center;
+    }
+}

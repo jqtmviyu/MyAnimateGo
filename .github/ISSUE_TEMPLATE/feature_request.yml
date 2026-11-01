@@ -1,0 +1,14 @@
+name: 功能建议
+description: 提出 Go / Vue 版本的改进建议
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: 希望解决什么问题
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 期望的交互或行为

@@ -1,0 +1,118 @@
+{
+  "renameCases": [
+    {
+      "name": "普通集数与分辨率",
+      "subscriptionTitle": "Sample Show",
+      "season": 2,
+      "offset": 0,
+      "ova": false,
+      "customEpisode": false,
+      "customEpisodeRegex": null,
+      "customEpisodeGroup": null,
+      "skipHalfEpisodes": false,
+      "subgroup": "Fansub",
+      "itemTitle": "[Fansub] Sample Show - 03 [1080p]",
+      "renameTemplate": "[${subgroup}] ${title} S${seasonFormat}E${episodeFormat} ${resolution}",
+      "expectedAccepted": true,
+      "expectedEpisode": 3.0,
+      "expectedName": "[Fansub] Sample Show S02E03 1080p"
+    },
+    {
+      "name": "负数集数偏移",
+      "subscriptionTitle": "Offset Show",
+      "season": 1,
+      "offset": -2,
+      "ova": false,
+      "customEpisode": false,
+      "customEpisodeRegex": null,
+      "customEpisodeGroup": null,
+      "skipHalfEpisodes": false,
+      "subgroup": "Group",
+      "itemTitle": "[Group] Offset Show EP04",
+      "renameTemplate": "[${subgroup}] ${title} S${seasonFormat}E${episodeFormat} ${resolution}",
+      "expectedAccepted": true,
+      "expectedEpisode": 2.0,
+      "expectedName": "[Group] Offset Show S01E02 none"
+    },
+    {
+      "name": "允许半集时保留半集",
+      "subscriptionTitle": "Half Show",
+      "season": 1,
+      "offset": 0,
+      "ova": false,
+      "customEpisode": false,
+      "customEpisodeRegex": null,
+      "customEpisodeGroup": null,
+      "skipHalfEpisodes": false,
+      "subgroup": "Group",
+      "itemTitle": "[Group] Half Show EP03.5",
+      "renameTemplate": "[${subgroup}] ${title} S${seasonFormat}E${episodeFormat}",
+      "expectedAccepted": true,
+      "expectedEpisode": 3.5,
+      "expectedName": "[Group] Half Show S01E03.5"
+    },
+    {
+      "name": "自定义集数捕获组",
+      "subscriptionTitle": "Custom Show",
+      "season": 3,
+      "offset": 0,
+      "ova": false,
+      "customEpisode": true,
+      "customEpisodeRegex": "\\d+x(\\d+)",
+      "customEpisodeGroup": 1,
+      "skipHalfEpisodes": false,
+      "subgroup": "Group",
+      "itemTitle": "[Group] Custom Show 02x07 special",
+      "renameTemplate": "[${subgroup}] ${title} S${seasonFormat}E${episodeFormat}",
+      "expectedAccepted": true,
+      "expectedEpisode": 7.0,
+      "expectedName": "[Group] Custom Show S03E07"
+    },
+    {
+      "name": "设置跳过半集",
+      "subscriptionTitle": "Skipped Half Show",
+      "season": 1,
+      "offset": 0,
+      "ova": false,
+      "customEpisode": false,
+      "customEpisodeRegex": null,
+      "customEpisodeGroup": null,
+      "skipHalfEpisodes": true,
+      "subgroup": "Group",
+      "itemTitle": "[Group] Skipped Half Show EP02.5",
+      "renameTemplate": "[${subgroup}] ${title} S${seasonFormat}E${episodeFormat}",
+      "expectedAccepted": false,
+      "expectedEpisode": 2.5,
+      "expectedName": "[Group] Skipped Half Show EP02.5"
+    },
+    {
+      "name": "OVA 标题清理",
+      "subscriptionTitle": "Movie (2024) [tmdbid=99]",
+      "season": 1,
+      "offset": 0,
+      "ova": true,
+      "customEpisode": false,
+      "customEpisodeRegex": null,
+      "customEpisodeGroup": null,
+      "skipHalfEpisodes": false,
+      "subgroup": "Group",
+      "itemTitle": "ignored",
+      "renameTemplate": "ignored",
+      "expectedAccepted": true,
+      "expectedName": "Movie"
+    }
+  ],
+  "filenameReplacementCase": {
+    "input": "../Show:Part?A*B\\C",
+    "expected": ".. Show：Part？A B C"
+  },
+  "rssProgressCase": {
+    "downloadNew": false,
+    "episodes": [1.0, 2.5, 3.0],
+    "expectedCurrentEpisodeNumber": 2
+  },
+  "rssMissingEpisodeCase": {
+    "episodes": [1.0, 1.0, 3.0],
+    "expectedMissingEpisodes": [2]
+  }
+}

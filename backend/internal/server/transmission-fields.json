@@ -1,0 +1,398 @@
+{
+  "session": [
+    {
+      "key": "download-dir",
+      "label": "默认下载目录",
+      "kind": "string",
+      "group": "下载"
+    },
+    {
+      "key": "start-added-torrents",
+      "label": "默认启动新任务",
+      "kind": "bool",
+      "group": "下载"
+    },
+    {
+      "key": "rename-partial-files",
+      "label": "未完成文件使用 .part 后缀",
+      "kind": "bool",
+      "group": "下载"
+    },
+    {
+      "key": "incomplete-dir-enabled",
+      "label": "使用独立未完成目录",
+      "kind": "bool",
+      "group": "下载"
+    },
+    {
+      "key": "incomplete-dir",
+      "label": "未完成目录",
+      "kind": "string",
+      "group": "下载"
+    },
+    {
+      "key": "seedRatioLimited",
+      "label": "启用默认做种分享率限制",
+      "kind": "bool",
+      "group": "下载"
+    },
+    {
+      "key": "seedRatioLimit",
+      "label": "默认做种分享率",
+      "kind": "number",
+      "group": "下载"
+    },
+    {
+      "key": "idle-seeding-limit-enabled",
+      "label": "启用空闲停止做种",
+      "kind": "bool",
+      "group": "下载"
+    },
+    {
+      "key": "idle-seeding-limit",
+      "label": "空闲停止时长",
+      "kind": "int",
+      "group": "下载",
+      "unit": "分钟"
+    },
+    {
+      "key": "cache-size-mb",
+      "label": "磁盘缓存",
+      "kind": "int",
+      "group": "下载",
+      "unit": "MiB"
+    },
+    {
+      "key": "sequential_download",
+      "label": "默认顺序下载",
+      "kind": "bool",
+      "group": "下载",
+      "minRPC": 18
+    },
+    {
+      "key": "peer-port",
+      "label": "监听端口",
+      "kind": "port",
+      "group": "网络"
+    },
+    {
+      "key": "peer-port-random-on-start",
+      "label": "启动时使用随机端口",
+      "kind": "bool",
+      "group": "网络"
+    },
+    {
+      "key": "port-forwarding-enabled",
+      "label": "自动端口映射 UPnP / NAT-PMP",
+      "kind": "bool",
+      "group": "网络"
+    },
+    {
+      "key": "peer-limit-global",
+      "label": "全局最大连接数",
+      "kind": "int",
+      "group": "网络"
+    },
+    {
+      "key": "peer-limit-per-torrent",
+      "label": "每任务最大连接数",
+      "kind": "int",
+      "group": "网络"
+    },
+    {
+      "key": "pex-enabled",
+      "label": "启用 PEX 节点交换",
+      "kind": "bool",
+      "group": "网络"
+    },
+    {
+      "key": "dht-enabled",
+      "label": "启用 DHT",
+      "kind": "bool",
+      "group": "网络"
+    },
+    {
+      "key": "lpd-enabled",
+      "label": "启用本地节点发现 LPD",
+      "kind": "bool",
+      "group": "网络"
+    },
+    {
+      "key": "utp-enabled",
+      "label": "启用 µTP",
+      "kind": "bool",
+      "group": "网络"
+    },
+    {
+      "key": "tcp-enabled",
+      "label": "启用 TCP",
+      "kind": "bool",
+      "group": "网络"
+    },
+    {
+      "key": "blocklist-enabled",
+      "label": "启用 IP 黑名单",
+      "kind": "bool",
+      "group": "网络"
+    },
+    {
+      "key": "blocklist-url",
+      "label": "黑名单订阅地址",
+      "kind": "string",
+      "group": "网络"
+    },
+    {
+      "key": "encryption",
+      "label": "连接加密",
+      "kind": "enum",
+      "group": "网络",
+      "options": [
+        {
+          "value": "tolerated",
+          "label": "允许未加密"
+        },
+        {
+          "value": "preferred",
+          "label": "优先加密"
+        },
+        {
+          "value": "required",
+          "label": "强制加密"
+        }
+      ]
+    },
+    {
+      "key": "speed-limit-down-enabled",
+      "label": "启用下载限速",
+      "kind": "bool",
+      "group": "带宽"
+    },
+    {
+      "key": "speed-limit-down",
+      "label": "下载速度上限",
+      "kind": "int",
+      "group": "带宽",
+      "unit": "kB/s"
+    },
+    {
+      "key": "speed-limit-up-enabled",
+      "label": "启用上传限速",
+      "kind": "bool",
+      "group": "带宽"
+    },
+    {
+      "key": "speed-limit-up",
+      "label": "上传速度上限",
+      "kind": "int",
+      "group": "带宽",
+      "unit": "kB/s"
+    },
+    {
+      "key": "alt-speed-enabled",
+      "label": "启用备用限速",
+      "kind": "bool",
+      "group": "带宽"
+    },
+    {
+      "key": "alt-speed-down",
+      "label": "备用下载速度上限",
+      "kind": "int",
+      "group": "带宽",
+      "unit": "kB/s"
+    },
+    {
+      "key": "alt-speed-up",
+      "label": "备用上传速度上限",
+      "kind": "int",
+      "group": "带宽",
+      "unit": "kB/s"
+    },
+    {
+      "key": "alt-speed-time-enabled",
+      "label": "按时间自动切换备用限速",
+      "kind": "bool",
+      "group": "带宽"
+    },
+    {
+      "key": "alt-speed-time-begin",
+      "label": "备用限速开始时间",
+      "kind": "time",
+      "group": "带宽"
+    },
+    {
+      "key": "alt-speed-time-end",
+      "label": "备用限速结束时间",
+      "kind": "time",
+      "group": "带宽"
+    },
+    {
+      "key": "alt-speed-time-day",
+      "label": "备用限速生效星期",
+      "kind": "days",
+      "group": "带宽"
+    },
+    {
+      "key": "download-queue-enabled",
+      "label": "限制并发下载任务",
+      "kind": "bool",
+      "group": "队列"
+    },
+    {
+      "key": "download-queue-size",
+      "label": "下载队列长度",
+      "kind": "int",
+      "group": "队列"
+    },
+    {
+      "key": "seed-queue-enabled",
+      "label": "限制并发做种任务",
+      "kind": "bool",
+      "group": "队列"
+    },
+    {
+      "key": "seed-queue-size",
+      "label": "做种队列长度",
+      "kind": "int",
+      "group": "队列"
+    },
+    {
+      "key": "queue-stalled-enabled",
+      "label": "停滞任务不占用队列名额",
+      "kind": "bool",
+      "group": "队列"
+    },
+    {
+      "key": "queue-stalled-minutes",
+      "label": "判定停滞的空闲时长",
+      "kind": "int",
+      "group": "队列",
+      "unit": "分钟"
+    }
+  ],
+  "torrent": [
+    {
+      "key": "downloadLimited",
+      "label": "限制下载速度",
+      "kind": "bool",
+      "group": "任务"
+    },
+    {
+      "key": "downloadLimit",
+      "label": "下载速度上限",
+      "kind": "int",
+      "group": "任务",
+      "unit": "kB/s"
+    },
+    {
+      "key": "uploadLimited",
+      "label": "限制上传速度",
+      "kind": "bool",
+      "group": "任务"
+    },
+    {
+      "key": "uploadLimit",
+      "label": "上传速度上限",
+      "kind": "int",
+      "group": "任务",
+      "unit": "kB/s"
+    },
+    {
+      "key": "honorsSessionLimits",
+      "label": "遵循全局速度限制",
+      "kind": "bool",
+      "group": "任务"
+    },
+    {
+      "key": "peer-limit",
+      "label": "最大连接数",
+      "kind": "int",
+      "group": "任务"
+    },
+    {
+      "key": "seedRatioLimit",
+      "label": "做种分享率",
+      "kind": "number",
+      "group": "任务"
+    },
+    {
+      "key": "seedIdleLimit",
+      "label": "空闲停止时长",
+      "kind": "int",
+      "group": "任务",
+      "unit": "分钟"
+    },
+    {
+      "key": "group",
+      "label": "带宽组",
+      "kind": "text",
+      "group": "任务"
+    },
+    {
+      "key": "sequential_download",
+      "label": "顺序下载",
+      "kind": "bool",
+      "group": "任务",
+      "minRPC": 18
+    },
+    {
+      "key": "seedRatioMode",
+      "label": "分享率停止规则",
+      "kind": "enum",
+      "group": "任务",
+      "options": [
+        {
+          "value": 0,
+          "label": "继承全局"
+        },
+        {
+          "value": 1,
+          "label": "使用任务设置"
+        },
+        {
+          "value": 2,
+          "label": "无限制"
+        }
+      ]
+    },
+    {
+      "key": "seedIdleMode",
+      "label": "空闲停止规则",
+      "kind": "enum",
+      "group": "任务",
+      "options": [
+        {
+          "value": 0,
+          "label": "继承全局"
+        },
+        {
+          "value": 1,
+          "label": "使用任务设置"
+        },
+        {
+          "value": 2,
+          "label": "无限制"
+        }
+      ]
+    },
+    {
+      "key": "bandwidthPriority",
+      "label": "带宽优先级",
+      "kind": "enum",
+      "group": "任务",
+      "options": [
+        {
+          "value": -1,
+          "label": "低"
+        },
+        {
+          "value": 0,
+          "label": "普通"
+        },
+        {
+          "value": 1,
+          "label": "高"
+        }
+      ]
+    }
+  ]
+}

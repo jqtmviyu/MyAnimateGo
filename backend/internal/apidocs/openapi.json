@@ -1,0 +1,4999 @@
+{
+  "components": {
+    "schemas": {
+      "Ani": {
+        "description": "订阅",
+        "properties": {
+          "bgmUrl": {
+            "description": "BGM 地址",
+            "type": "string"
+          },
+          "completed": {
+            "description": "完结迁移",
+            "type": "boolean"
+          },
+          "cover": {
+            "description": "封面本地保存位置",
+            "type": "string"
+          },
+          "currentEpisodeNumber": {
+            "description": "当前集数",
+            "format": "int32",
+            "type": "integer"
+          },
+          "customCompleted": {
+            "description": "自定义完结迁移开关",
+            "type": "boolean"
+          },
+          "customCompletedPathTemplate": {
+            "description": "自定义完结迁移路径模版",
+            "type": "string"
+          },
+          "customDownloadPath": {
+            "description": "自定义下载位置",
+            "type": "boolean"
+          },
+          "customDownloadPathTemplate": {
+            "description": "自定义下载位置路径",
+            "type": "string"
+          },
+          "customEpisode": {
+            "description": "自定义集数获取规则",
+            "type": "boolean"
+          },
+          "customEpisodeGroupIndex": {
+            "description": "自定义集数获取规则 groupIndex",
+            "format": "int32",
+            "type": "integer"
+          },
+          "customEpisodeStr": {
+            "description": "自定义集数获取规则表达式",
+            "type": "string"
+          },
+          "customRenameTemplate": {
+            "description": "自定义重命名模版",
+            "type": "string"
+          },
+          "customRenameTemplateEnable": {
+            "description": "自定义重命名模版开关",
+            "type": "boolean"
+          },
+          "customTags": {
+            "description": "单个订阅自定义标签",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "customTagsEnable": {
+            "description": "自定义标签开关",
+            "type": "boolean"
+          },
+          "customUploadEnable": {
+            "description": "自定义上传开关",
+            "type": "boolean"
+          },
+          "customUploadPathTarget": {
+            "description": "自定义上传目标路径",
+            "type": "string"
+          },
+          "date": {
+            "deprecated": true,
+            "description": "日",
+            "format": "int32",
+            "type": "integer"
+          },
+          "downloadNew": {
+            "description": "只下载最新集",
+            "type": "boolean"
+          },
+          "enable": {
+            "description": "启用",
+            "type": "boolean"
+          },
+          "exclude": {
+            "description": "排除",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "exists": {
+            "type": "boolean"
+          },
+          "globalExclude": {
+            "description": "是否启用全局排除",
+            "type": "boolean"
+          },
+          "id": {
+            "description": "id",
+            "type": "string"
+          },
+          "image": {
+            "description": "图片 https://",
+            "type": "string"
+          },
+          "jpTitle": {
+            "description": "日语标题 来源于BGM",
+            "type": "string"
+          },
+          "lastDownloadTime": {
+            "description": "上次下载完成时间",
+            "format": "int64",
+            "type": "integer"
+          },
+          "match": {
+            "description": "匹配",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "消息通知",
+            "type": "boolean"
+          },
+          "mikanTitle": {
+            "description": "不在页面显示",
+            "type": "string"
+          },
+          "month": {
+            "deprecated": true,
+            "description": "月",
+            "format": "int32",
+            "type": "integer"
+          },
+          "notDownload": {
+            "description": "不进行下载的集",
+            "items": {
+              "format": "double",
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "offset": {
+            "description": "剧集偏移",
+            "format": "int32",
+            "type": "integer"
+          },
+          "omit": {
+            "description": "遗漏检测",
+            "type": "boolean"
+          },
+          "ova": {
+            "description": "剧场版 or OVA",
+            "type": "boolean"
+          },
+          "pinyin": {
+            "description": "拼音",
+            "type": "string"
+          },
+          "pinyinInitials": {
+            "description": "拼音首字母",
+            "type": "string"
+          },
+          "releaseDate": {
+            "description": "发布日期",
+            "format": "date-time",
+            "type": "string"
+          },
+          "score": {
+            "description": "评分",
+            "format": "double",
+            "type": "number"
+          },
+          "season": {
+            "description": "季度",
+            "format": "int32",
+            "type": "integer"
+          },
+          "sort": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "standbyRssList": {
+            "description": "备用rss",
+            "items": {
+              "$ref": "#/components/schemas/StandbyRss"
+            },
+            "type": "array"
+          },
+          "subgroup": {
+            "description": "字幕组",
+            "type": "string"
+          },
+          "themoviedbName": {
+            "description": "TheMovieDB 名称",
+            "type": "string"
+          },
+          "title": {
+            "description": "标题",
+            "type": "string"
+          },
+          "tmdb": {
+            "$ref": "#/components/schemas/Tmdb",
+            "description": "TMDB 相关信息"
+          },
+          "totalEpisodeNumber": {
+            "description": "总集数",
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": {
+            "description": "类型",
+            "type": "string"
+          },
+          "upload": {
+            "description": "自动上传",
+            "type": "boolean"
+          },
+          "url": {
+            "description": "RSS URL",
+            "type": "string"
+          },
+          "weekLabel": {
+            "description": "星期 1表示周日，2表示周一",
+            "type": "string"
+          },
+          "year": {
+            "deprecated": true,
+            "description": "年度",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "AniBT": {
+        "description": "AniBT",
+        "properties": {
+          "availableSeasons": {
+            "description": "可用的季度列表",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "byWeekday": {
+            "description": "按星期分类的番剧列表",
+            "items": {
+              "$ref": "#/components/schemas/ByWeekday"
+            },
+            "type": "array"
+          },
+          "currentSeason": {
+            "description": "当前季度",
+            "type": "string"
+          },
+          "requestedSeason": {
+            "description": "请求的季度",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AniBTQueryDTO": {
+        "properties": {
+          "bgmUrl": {
+            "type": "string"
+          },
+          "season": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Anime": {
+        "description": "番剧信息",
+        "properties": {
+          "animeId": {
+            "description": "番剧ID",
+            "type": "string"
+          },
+          "bgmId": {
+            "description": "BGM ID",
+            "type": "string"
+          },
+          "cover": {
+            "description": "封面图片",
+            "type": "string"
+          },
+          "exists": {
+            "description": "是否已订阅",
+            "type": "boolean"
+          },
+          "format": {
+            "description": "格式",
+            "type": "string"
+          },
+          "rating": {
+            "description": "评分",
+            "format": "double",
+            "type": "number"
+          },
+          "rssReleaseCount": {
+            "description": "RSS发布数量",
+            "format": "int32",
+            "type": "integer"
+          },
+          "title": {
+            "$ref": "#/components/schemas/Title",
+            "description": "标题"
+          }
+        },
+        "type": "object"
+      },
+      "BgmInfo": {
+        "description": "Bgm番剧信息",
+        "properties": {
+          "date": {
+            "description": "时间",
+            "format": "date-time",
+            "type": "string"
+          },
+          "eps": {
+            "description": "集数",
+            "format": "int32",
+            "type": "integer"
+          },
+          "id": {
+            "type": "string"
+          },
+          "images": {
+            "$ref": "#/components/schemas/Images",
+            "description": "图片"
+          },
+          "infobox": {
+            "items": {
+              "$ref": "#/components/schemas/JsonObject"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "名称",
+            "type": "string"
+          },
+          "nameCn": {
+            "description": "中文名称",
+            "type": "string"
+          },
+          "platform": {
+            "description": "平台 OVA/剧场版",
+            "type": "string"
+          },
+          "rating": {
+            "$ref": "#/components/schemas/Rating"
+          },
+          "season": {
+            "description": "季度",
+            "format": "int32",
+            "type": "integer"
+          },
+          "tags": {
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "type": "array"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ByWeekday": {
+        "description": "按星期分类",
+        "properties": {
+          "animes": {
+            "description": "番剧列表",
+            "items": {
+              "$ref": "#/components/schemas/Anime"
+            },
+            "type": "array"
+          },
+          "weekday": {
+            "description": "星期几",
+            "format": "int32",
+            "type": "integer"
+          },
+          "weekdayLabel": {
+            "description": "星期标签",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "CollectionInfo": {
+        "description": "合集",
+        "properties": {
+          "ani": {
+            "$ref": "#/components/schemas/Ani",
+            "description": "订阅"
+          },
+          "bgmInfo": {
+            "$ref": "#/components/schemas/BgmInfo",
+            "description": "bgm"
+          },
+          "torrent": {
+            "description": "种子文件 Base64",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Config": {
+        "description": "设置",
+        "properties": {
+          "allowCors": {
+            "description": "允许跨域",
+            "type": "boolean"
+          },
+          "apiKey": {
+            "description": "API Key",
+            "type": "string"
+          },
+          "autoDisabled": {
+            "description": "自动禁用已完结番剧订阅",
+            "type": "boolean"
+          },
+          "automaticTasksPaused": {
+            "description": "自动任务暂停状态；普通设置保存忽略此字段，通过 setAutomaticTasksPaused 明确启停。",
+            "readOnly": true,
+            "type": "boolean"
+          },
+          "awaitStalledUP": {
+            "description": "等待做种完毕",
+            "type": "boolean"
+          },
+          "bgmApi": {
+            "description": "bgmApi",
+            "type": "string"
+          },
+          "bgmImageSize": {
+            "description": "BGM 封面图片质量",
+            "type": "string"
+          },
+          "bgmJpName": {
+            "description": "BGM日语标题",
+            "type": "boolean"
+          },
+          "bgmToken": {
+            "description": "可选的 Bangumi 资料接口访问凭据；留空时匿名请求，填写后携带 Bearer Token，不提供账号联动或自动续期。",
+            "type": "string"
+          },
+          "coexist": {
+            "description": "多字幕组共存模式",
+            "type": "boolean"
+          },
+          "completed": {
+            "description": "番剧完结迁移",
+            "type": "boolean"
+          },
+          "completedPathTemplate": {
+            "description": "番剧完结迁移位置",
+            "type": "string"
+          },
+          "configBackup": {
+            "description": "设置备份",
+            "type": "boolean"
+          },
+          "configBackupDay": {
+            "description": "备份天数",
+            "format": "int32",
+            "type": "integer"
+          },
+          "customEpisode": {
+            "description": "自定义集数获取规则",
+            "type": "boolean"
+          },
+          "customEpisodeGroupIndex": {
+            "description": "自定义集数获取规则 groupIndex",
+            "format": "int32",
+            "type": "integer"
+          },
+          "customEpisodeStr": {
+            "description": "自定义集数获取规则表达式",
+            "type": "string"
+          },
+          "customTags": {
+            "description": "自定义标签",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "debug": {
+            "description": "DEBUG",
+            "type": "boolean"
+          },
+          "delayedDownload": {
+            "description": "延迟下载(分钟)",
+            "format": "int32",
+            "type": "integer"
+          },
+          "delete": {
+            "description": "自动删除已完成任务",
+            "type": "boolean"
+          },
+          "deleteStandbyRSSOnly": {
+            "description": "主RSS更新后删除备用RSS",
+            "type": "boolean"
+          },
+          "dlLimit": {
+            "description": "下载速度限制",
+            "format": "int64",
+            "type": "integer"
+          },
+          "downloadCount": {
+            "description": "同时下载数量限制",
+            "format": "int32",
+            "type": "integer"
+          },
+          "downloadNew": {
+            "description": "只下载最新集",
+            "type": "boolean"
+          },
+          "downloadPathTemplate": {
+            "description": "下载路径模版",
+            "type": "string"
+          },
+          "downloadRetry": {
+            "description": "下载重试次数",
+            "format": "int32",
+            "type": "integer"
+          },
+          "downloadToolHost": {
+            "description": "下载工具地址",
+            "type": "string"
+          },
+          "downloadToolPassword": {
+            "description": "下载工具密码",
+            "type": "string"
+          },
+          "downloadToolUsername": {
+            "description": "下载工具用户名",
+            "type": "string"
+          },
+          "enabledExclude": {
+            "description": "默认启用全局排除",
+            "type": "boolean"
+          },
+          "exclude": {
+            "description": "全局排除",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "expirationTime": {
+            "description": "捐赠过期时间",
+            "format": "int64",
+            "readOnly": true,
+            "type": "integer"
+          },
+          "fileExist": {
+            "description": "文件已下载自动跳过",
+            "type": "boolean"
+          },
+          "forceUpdateTotalEpisodeNumber": {
+            "description": "强制更新总集数信息",
+            "type": "boolean"
+          },
+          "gitInfo": {
+            "$ref": "#/components/schemas/GitInfo",
+            "description": "Git信息"
+          },
+          "importExclude": {
+            "description": "默认导入全局排除",
+            "type": "boolean"
+          },
+          "innerIP": {
+            "description": "仅允许内网 IP 访问",
+            "type": "boolean"
+          },
+          "ipWhitelist": {
+            "description": "开启 IP 白名单",
+            "type": "boolean"
+          },
+          "ipWhitelistStr": {
+            "description": "IP 白名单",
+            "type": "string"
+          },
+          "jwtKey": {
+            "description": "JwtKey",
+            "readOnly": true,
+            "type": "string"
+          },
+          "limitLoginAttempts": {
+            "description": "限制尝试次数",
+            "type": "boolean"
+          },
+          "login": {
+            "$ref": "#/components/schemas/Login",
+            "description": "登录信息"
+          },
+          "loginEffectiveHours": {
+            "description": "登录有效时间(小时)",
+            "format": "int32",
+            "type": "integer"
+          },
+          "logsMax": {
+            "description": "最大日志条数",
+            "format": "int32",
+            "type": "integer"
+          },
+          "maxFileNameLength": {
+            "description": "最大文件名长度(不含后缀)",
+            "format": "int32",
+            "type": "integer"
+          },
+          "migrationReport": {
+            "additionalProperties": true,
+            "description": "导入时保存的脱敏迁移报告；其中暂停字段为导入时状态，当前状态见 automaticTasksPaused。",
+            "readOnly": true,
+            "type": "object"
+          },
+          "mikanHost": {
+            "description": "Mikan Host",
+            "type": "string"
+          },
+          "multiLoginForbidden": {
+            "description": "禁止多端登录",
+            "type": "boolean"
+          },
+          "notificationConfigList": {
+            "description": "通知配置列表",
+            "items": {
+              "$ref": "#/components/schemas/NotificationConfig"
+            },
+            "type": "array"
+          },
+          "notificationTemplate": {
+            "description": "消息模版",
+            "type": "string"
+          },
+          "offset": {
+            "description": "自动推断剧集偏移",
+            "type": "boolean"
+          },
+          "omit": {
+            "description": "检测遗漏集数",
+            "type": "boolean"
+          },
+          "outTradeNo": {
+            "description": "爱发电订单号",
+            "readOnly": true,
+            "type": "string"
+          },
+          "ovaDownloadPathTemplate": {
+            "description": "剧场版下载路径模版",
+            "type": "string"
+          },
+          "peerFilter": {
+            "description": "节点过滤设置：enabled/baseUrl/sources/refreshMinutes/identify/scanSeconds/banHours/maxBans/rules/allow；来源限定为btn/chinanet/cmcc/cncgroup。名称规则支持EQUALS/CONTAINS/STARTS_WITH/REGEX。",
+            "type": "object"
+          },
+          "proxy": {
+            "description": "代理是否开启",
+            "type": "boolean"
+          },
+          "proxyHost": {
+            "description": "代理 host",
+            "type": "string"
+          },
+          "proxyList": {
+            "description": "代理列表",
+            "type": "string"
+          },
+          "proxyPassword": {
+            "description": "代理密码",
+            "type": "string"
+          },
+          "proxyPort": {
+            "description": "代理端口",
+            "format": "int32",
+            "type": "integer"
+          },
+          "proxyUsername": {
+            "description": "代理用户名",
+            "type": "string"
+          },
+          "rename": {
+            "description": "自动重命名",
+            "type": "boolean"
+          },
+          "renameDelTmdbId": {
+            "description": "重命名剔除 TMDB ID",
+            "type": "boolean"
+          },
+          "renameDelYear": {
+            "description": "重命名剔除年份",
+            "type": "boolean"
+          },
+          "renameSleepSeconds": {
+            "description": "重命名间隔(秒)",
+            "format": "int32",
+            "type": "integer"
+          },
+          "renameTemplate": {
+            "description": "重命名模版",
+            "type": "string"
+          },
+          "reverseProxyTrustIpList": {
+            "description": "受信任的反向代理IP",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "reverseProxyTrustIpListEnabled": {
+            "description": "启用 受信任的反向代理IP",
+            "type": "boolean"
+          },
+          "rss": {
+            "description": "RSS 开关",
+            "type": "boolean"
+          },
+          "rssSleepMinutes": {
+            "description": "RSS 间隔(分钟)",
+            "format": "int32",
+            "type": "integer"
+          },
+          "rssTimeout": {
+            "description": "RSS 超时时间(秒)",
+            "format": "int32",
+            "type": "integer"
+          },
+          "skip5": {
+            "description": "自动跳过 x.5 集数",
+            "type": "boolean"
+          },
+          "sortType": {
+            "description": "排序方式",
+            "enum": [
+              "SCORE",
+              "PINYIN",
+              "DOWNLOAD_TIME"
+            ],
+            "type": "string"
+          },
+          "standbyRss": {
+            "description": "备用RSS",
+            "type": "boolean"
+          },
+          "subtitleIndependentFolderEnabled": {
+            "description": "启用 字幕独立文件夹",
+            "type": "boolean"
+          },
+          "subtitleIndependentFolderName": {
+            "description": "字幕独立文件夹",
+            "type": "string"
+          },
+          "titleYear": {
+            "description": "获取标题时带上年份",
+            "type": "boolean"
+          },
+          "tmdb": {
+            "description": "启用 TMDB",
+            "type": "boolean"
+          },
+          "tmdbAnime": {
+            "description": "仅获取动漫",
+            "type": "boolean"
+          },
+          "tmdbApi": {
+            "description": "TMDB API",
+            "type": "string"
+          },
+          "tmdbApiKey": {
+            "description": "TMDB API Key",
+            "type": "string"
+          },
+          "tmdbId": {
+            "description": "标题带 TMDB ID",
+            "type": "boolean"
+          },
+          "tmdbLanguage": {
+            "description": "TMDB 语言",
+            "type": "string"
+          },
+          "tmdbOriginalName": {
+            "default": false,
+            "type": "boolean"
+          },
+          "tmdbRomaji": {
+            "description": "获取罗马音",
+            "type": "boolean"
+          },
+          "tokenId": {
+            "description": "tokenId",
+            "readOnly": true,
+            "type": "string"
+          },
+          "tryOut": {
+            "description": "试用",
+            "readOnly": true,
+            "type": "boolean"
+          },
+          "upLimit": {
+            "description": "上传速度限制",
+            "format": "int64",
+            "type": "integer"
+          },
+          "updateTotalEpisodeNumber": {
+            "description": "自动更新总集数信息",
+            "type": "boolean"
+          },
+          "upload": {
+            "description": "新增订阅自动上传",
+            "type": "boolean"
+          },
+          "uuid": {
+            "description": "唯一ID",
+            "type": "string"
+          },
+          "verifyExpirationTime": {
+            "description": "捐赠或试用是否过期",
+            "type": "boolean"
+          },
+          "verifyLoginIp": {
+            "description": "校验登录 IP",
+            "type": "boolean"
+          },
+          "developmentMode": {
+            "type": "boolean",
+            "readOnly": true,
+            "description": "启动参数 -dev 决定，只有开发模式提供自动任务暂停入口。"
+          }
+        },
+        "type": "object"
+      },
+      "EmbyViews": {
+        "description": "Emby 媒体库",
+        "properties": {
+          "id": {
+            "description": "id",
+            "type": "string"
+          },
+          "name": {
+            "description": "名称",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "GitInfo": {
+        "description": "Git信息",
+        "properties": {
+          "branch": {
+            "description": "分支名称",
+            "type": "string"
+          },
+          "commitId": {
+            "description": "提交ID",
+            "type": "string"
+          },
+          "shortCommitId": {
+            "description": "短提交ID",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Group": {
+        "properties": {
+          "bgmUrl": {
+            "type": "string"
+          },
+          "groupRegex": {
+            "$ref": "#/components/schemas/GroupRegex"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            },
+            "type": "array"
+          },
+          "label": {
+            "type": "string"
+          },
+          "rss": {
+            "type": "string"
+          },
+          "subgroupId": {
+            "type": "string"
+          },
+          "updateDay": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "GroupRegex": {
+        "properties": {
+          "regexList": {
+            "description": "正则表达式列表",
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/RegexItem"
+              },
+              "type": "array"
+            },
+            "type": "array"
+          },
+          "tags": {
+            "description": "标签集合",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "IdDTO": {
+        "properties": {
+          "id": {
+            "description": "id",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Images": {
+        "description": "封面图片",
+        "properties": {
+          "common": {
+            "type": "string"
+          },
+          "grid": {
+            "type": "string"
+          },
+          "large": {
+            "type": "string"
+          },
+          "medium": {
+            "type": "string"
+          },
+          "small": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ImportAniDataDTO": {
+        "properties": {
+          "aniList": {
+            "items": {
+              "$ref": "#/components/schemas/Ani"
+            },
+            "type": "array"
+          },
+          "conflict": {
+            "enum": [
+              "REPLACE",
+              "SKIP"
+            ],
+            "type": "string"
+          },
+          "filename": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Item": {
+        "description": "资源项",
+        "properties": {
+          "episode": {
+            "description": "集数",
+            "format": "double",
+            "type": "number"
+          },
+          "formatSize": {
+            "description": "大小",
+            "type": "string"
+          },
+          "hasDownloaded": {
+            "description": "已下载",
+            "type": "boolean"
+          },
+          "infoHash": {
+            "description": "infoHash",
+            "type": "string"
+          },
+          "length": {
+            "description": "大小",
+            "format": "int64",
+            "type": "integer"
+          },
+          "master": {
+            "description": "主 rss",
+            "type": "boolean"
+          },
+          "pubDate": {
+            "description": "发布时间",
+            "format": "date-time",
+            "type": "string"
+          },
+          "reName": {
+            "description": "重命名",
+            "type": "string"
+          },
+          "subgroup": {
+            "description": "字幕组",
+            "type": "string"
+          },
+          "title": {
+            "description": "标题",
+            "type": "string"
+          },
+          "torrent": {
+            "description": "种子",
+            "type": "string"
+          },
+          "torrentPath": {
+            "default": "种子位置",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "JsonArray": {
+        "properties": {
+          "asBigDecimal": {
+            "type": "number"
+          },
+          "asBigInteger": {
+            "type": "integer"
+          },
+          "asBoolean": {
+            "type": "boolean"
+          },
+          "asByte": {
+            "format": "byte",
+            "type": "string"
+          },
+          "asCharacter": {
+            "deprecated": true,
+            "type": "string"
+          },
+          "asDouble": {
+            "format": "double",
+            "type": "number"
+          },
+          "asFloat": {
+            "format": "float",
+            "type": "number"
+          },
+          "asInt": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "asJsonArray": {
+            "$ref": "#/components/schemas/JsonArray"
+          },
+          "asJsonNull": {
+            "$ref": "#/components/schemas/JsonNull"
+          },
+          "asJsonObject": {
+            "$ref": "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive": {
+            "$ref": "#/components/schemas/JsonPrimitive"
+          },
+          "asLong": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "asNumber": {
+            "type": "number"
+          },
+          "asShort": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "asString": {
+            "type": "string"
+          },
+          "empty": {
+            "type": "boolean"
+          },
+          "jsonArray": {
+            "type": "boolean"
+          },
+          "jsonNull": {
+            "type": "boolean"
+          },
+          "jsonObject": {
+            "type": "boolean"
+          },
+          "jsonPrimitive": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "JsonNull": {
+        "properties": {
+          "asBigDecimal": {
+            "type": "number"
+          },
+          "asBigInteger": {
+            "type": "integer"
+          },
+          "asBoolean": {
+            "type": "boolean"
+          },
+          "asByte": {
+            "format": "byte",
+            "type": "string"
+          },
+          "asCharacter": {
+            "deprecated": true,
+            "type": "string"
+          },
+          "asDouble": {
+            "format": "double",
+            "type": "number"
+          },
+          "asFloat": {
+            "format": "float",
+            "type": "number"
+          },
+          "asInt": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "asJsonArray": {
+            "$ref": "#/components/schemas/JsonArray"
+          },
+          "asJsonNull": {
+            "$ref": "#/components/schemas/JsonNull"
+          },
+          "asJsonObject": {
+            "$ref": "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive": {
+            "$ref": "#/components/schemas/JsonPrimitive"
+          },
+          "asLong": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "asNumber": {
+            "type": "number"
+          },
+          "asShort": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "asString": {
+            "type": "string"
+          },
+          "jsonArray": {
+            "type": "boolean"
+          },
+          "jsonNull": {
+            "type": "boolean"
+          },
+          "jsonObject": {
+            "type": "boolean"
+          },
+          "jsonPrimitive": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "JsonObject": {
+        "properties": {
+          "asBigDecimal": {
+            "type": "number"
+          },
+          "asBigInteger": {
+            "type": "integer"
+          },
+          "asBoolean": {
+            "type": "boolean"
+          },
+          "asByte": {
+            "format": "byte",
+            "type": "string"
+          },
+          "asCharacter": {
+            "deprecated": true,
+            "type": "string"
+          },
+          "asDouble": {
+            "format": "double",
+            "type": "number"
+          },
+          "asFloat": {
+            "format": "float",
+            "type": "number"
+          },
+          "asInt": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "asJsonArray": {
+            "$ref": "#/components/schemas/JsonArray"
+          },
+          "asJsonNull": {
+            "$ref": "#/components/schemas/JsonNull"
+          },
+          "asJsonObject": {
+            "$ref": "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive": {
+            "$ref": "#/components/schemas/JsonPrimitive"
+          },
+          "asLong": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "asNumber": {
+            "type": "number"
+          },
+          "asShort": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "asString": {
+            "type": "string"
+          },
+          "empty": {
+            "type": "boolean"
+          },
+          "jsonArray": {
+            "type": "boolean"
+          },
+          "jsonNull": {
+            "type": "boolean"
+          },
+          "jsonObject": {
+            "type": "boolean"
+          },
+          "jsonPrimitive": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "JsonPrimitive": {
+        "properties": {
+          "asBigDecimal": {
+            "type": "number"
+          },
+          "asBigInteger": {
+            "type": "integer"
+          },
+          "asBoolean": {
+            "type": "boolean"
+          },
+          "asByte": {
+            "format": "byte",
+            "type": "string"
+          },
+          "asCharacter": {
+            "deprecated": true,
+            "type": "string"
+          },
+          "asDouble": {
+            "format": "double",
+            "type": "number"
+          },
+          "asFloat": {
+            "format": "float",
+            "type": "number"
+          },
+          "asInt": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "asJsonArray": {
+            "$ref": "#/components/schemas/JsonArray"
+          },
+          "asJsonNull": {
+            "$ref": "#/components/schemas/JsonNull"
+          },
+          "asJsonObject": {
+            "$ref": "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive": {
+            "$ref": "#/components/schemas/JsonPrimitive"
+          },
+          "asLong": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "asNumber": {
+            "type": "number"
+          },
+          "asShort": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "asString": {
+            "type": "string"
+          },
+          "boolean": {
+            "type": "boolean"
+          },
+          "jsonArray": {
+            "type": "boolean"
+          },
+          "jsonNull": {
+            "type": "boolean"
+          },
+          "jsonObject": {
+            "type": "boolean"
+          },
+          "jsonPrimitive": {
+            "type": "boolean"
+          },
+          "number": {
+            "type": "boolean"
+          },
+          "string": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "ListAni": {
+        "properties": {
+          "releaseDateList": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "total": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "weekList": {
+            "items": {
+              "$ref": "#/components/schemas/WeekAni"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Log": {
+        "description": "日志",
+        "properties": {
+          "level": {
+            "description": "日志级别",
+            "type": "string"
+          },
+          "loggerName": {
+            "description": "类路径",
+            "type": "string"
+          },
+          "message": {
+            "description": "日志信息",
+            "type": "string"
+          },
+          "threadName": {
+            "description": "线程名",
+            "type": "string"
+          },
+          "ts": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "Login": {
+        "description": "登录",
+        "properties": {
+          "password": {
+            "description": "密码 (MD5摘要)",
+            "type": "string"
+          },
+          "username": {
+            "description": "用户名",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Mikan": {
+        "description": "mikan",
+        "properties": {
+          "seasons": {
+            "description": "季度信息",
+            "items": {
+              "$ref": "#/components/schemas/Season"
+            },
+            "type": "array"
+          },
+          "totalItem": {
+            "description": "总番剧数",
+            "format": "int32",
+            "type": "integer"
+          },
+          "weeks": {
+            "description": "星期信息",
+            "items": {
+              "$ref": "#/components/schemas/Week"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "MikanInfo": {
+        "description": "mikan 番剧信息",
+        "properties": {
+          "bgmId": {
+            "description": "番剧 id",
+            "type": "string"
+          },
+          "bgmUrl": {
+            "description": "BGM",
+            "type": "string"
+          },
+          "cover": {
+            "description": "封面",
+            "type": "string"
+          },
+          "exists": {
+            "description": "已存在",
+            "type": "boolean"
+          },
+          "groups": {
+            "description": "字幕组",
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            },
+            "type": "array"
+          },
+          "score": {
+            "description": "评分",
+            "format": "double",
+            "type": "number"
+          },
+          "title": {
+            "description": "标题",
+            "type": "string"
+          },
+          "updateDate": {
+            "description": "Mikan 目录条目显示的更新日期，例如 2026/10/18 更新。",
+            "type": "string"
+          },
+          "url": {
+            "description": "mikan url",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "NotificationConfig": {
+        "description": "通知配置",
+        "properties": {
+          "comment": {
+            "description": "备注",
+            "type": "string"
+          },
+          "embyApiKey": {
+            "description": "Emby API 密钥",
+            "type": "string"
+          },
+          "embyDelayed": {
+            "description": "Emby 延迟扫描",
+            "format": "int64",
+            "type": "integer"
+          },
+          "embyHost": {
+            "description": "Emby 地址",
+            "type": "string"
+          },
+          "embyRefreshViewIds": {
+            "description": "Emby 扫描媒体库 ID 列表",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "enable": {
+            "description": "启用",
+            "type": "boolean"
+          },
+          "notificationTemplate": {
+            "description": "通知模版",
+            "type": "string"
+          },
+          "notificationType": {
+            "description": "通知类型",
+            "enum": [
+              "WEB_HOOK",
+              "EMBY_REFRESH"
+            ],
+            "type": "string"
+          },
+          "retry": {
+            "description": "重试次数",
+            "format": "int32",
+            "type": "integer"
+          },
+          "sort": {
+            "description": "顺序",
+            "format": "int64",
+            "type": "integer"
+          },
+          "statusList": {
+            "description": "通知状态",
+            "items": {
+              "enum": [
+                "DOWNLOAD_START",
+                "DOWNLOAD_END",
+                "OMIT",
+                "ERROR",
+                "COMPLETED"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "webHookBody": {
+            "description": "WebHook Body",
+            "type": "string"
+          },
+          "webHookHeader": {
+            "description": "WebHook Header",
+            "type": "string"
+          },
+          "webHookMethod": {
+            "description": "WebHook 方法",
+            "type": "string"
+          },
+          "webHookUrl": {
+            "description": "WebHook 地址",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ProxyTest": {
+        "description": "代理测试响应体",
+        "properties": {
+          "status": {
+            "description": "状态码",
+            "format": "int32",
+            "type": "integer"
+          },
+          "time": {
+            "description": "耗时",
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "default": "标题",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Rating": {
+        "description": "评分",
+        "properties": {
+          "count": {
+            "additionalProperties": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "description": "各阶段评分数",
+            "type": "object"
+          },
+          "rank": {
+            "description": "级别",
+            "format": "int32",
+            "type": "integer"
+          },
+          "score": {
+            "description": "评分",
+            "format": "double",
+            "type": "number"
+          },
+          "total": {
+            "description": "评分数",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "RegexItem": {
+        "description": "正则表达式项",
+        "properties": {
+          "label": {
+            "description": "标签",
+            "type": "string"
+          },
+          "regex": {
+            "description": "正则表达式",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ResultAni": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Ani",
+            "description": "数据"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultAniBT": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AniBT",
+            "description": "数据"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultConfig": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Config",
+            "description": "数据"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultJob": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultVoid"
+          },
+          {
+            "properties": {
+              "data": {
+                "properties": {
+                  "jobId": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "ResultListAni": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ListAni",
+            "description": "数据"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultListBgmInfo": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/BgmInfo"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultListEmbyViews": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/EmbyViews"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultListGroup": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultListItem": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultListLog": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/Log"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultListTmdbGroup": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/TmdbGroup"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultListTorrentsInfo": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/TorrentsInfo"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultListWeek": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/Week"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultMapStringObject": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "additionalProperties": {},
+            "description": "数据",
+            "type": "object"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultMikan": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Mikan",
+            "description": "数据"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultNotificationConfig": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/NotificationConfig",
+            "description": "数据"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultObject": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "description": "数据"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultProxyTest": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ProxyTest",
+            "description": "数据"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultString": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "description": "数据",
+            "type": "string"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultThemoviedbVO": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ThemoviedbVO",
+            "description": "数据"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ResultVoid": {
+        "description": "返回包装体",
+        "properties": {
+          "code": {
+            "description": "状态码",
+            "example": 200,
+            "format": "int32",
+            "type": "integer"
+          },
+          "data": {
+            "description": "数据"
+          },
+          "message": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "t": {
+            "description": "时间戳",
+            "example": 1715600000000,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "RssToAniDTO": {
+        "properties": {
+          "bgmUrl": {
+            "default": "https://bgm.tv/subject/544109",
+            "description": "BGM 地址",
+            "type": "string"
+          },
+          "enable": {
+            "default": true,
+            "description": "是否启用订阅",
+            "type": "boolean"
+          },
+          "standbyRssList": {
+            "description": "备用rss",
+            "items": {
+              "$ref": "#/components/schemas/StandbyRss"
+            },
+            "type": "array"
+          },
+          "subgroup": {
+            "default": "未知字幕组",
+            "description": "字幕组名",
+            "type": "string"
+          },
+          "type": {
+            "default": "mikan",
+            "description": "类型 mikan/ani-bt/anime-garden/other",
+            "type": "string"
+          },
+          "url": {
+            "default": "https://mikanani.me/RSS/Bangumi?bangumiId=3828&subgroupid=370",
+            "description": "RSS URL",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Season": {
+        "properties": {
+          "season": {
+            "description": "季度 如：春、夏、秋、冬",
+            "type": "string"
+          },
+          "seasonLabel": {
+            "type": "string"
+          },
+          "select": {
+            "type": "boolean"
+          },
+          "year": {
+            "description": "年 如：2024、2025、2026",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "StandbyRss": {
+        "description": "备用rss",
+        "properties": {
+          "label": {
+            "description": "字幕组",
+            "type": "string"
+          },
+          "offset": {
+            "description": "剧集偏移",
+            "format": "int32",
+            "type": "integer"
+          },
+          "url": {
+            "description": "url",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Tag": {
+        "description": "标签",
+        "properties": {
+          "count": {
+            "description": "计数",
+            "type": "string"
+          },
+          "name": {
+            "description": "标签名",
+            "type": "string"
+          },
+          "totalCont": {
+            "description": "总计数",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ThemoviedbDTO": {
+        "properties": {
+          "ova": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "tmdbId": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ThemoviedbVO": {
+        "properties": {
+          "themoviedbName": {
+            "description": "TheMovieDB 名称",
+            "type": "string"
+          },
+          "tmdb": {
+            "$ref": "#/components/schemas/Tmdb",
+            "description": "TMDB 相关信息"
+          }
+        },
+        "type": "object"
+      },
+      "Title": {
+        "description": "标题信息",
+        "properties": {
+          "chinese": {
+            "description": "中文标题",
+            "type": "string"
+          },
+          "chineseTraditional": {
+            "description": "繁体中文标题",
+            "type": "string"
+          },
+          "english": {
+            "description": "英文标题",
+            "type": "string"
+          },
+          "primary": {
+            "description": "主要标题",
+            "type": "string"
+          },
+          "romaji": {
+            "description": "罗马音标题",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Tmdb": {
+        "properties": {
+          "adult": {
+            "description": "成人",
+            "type": "boolean"
+          },
+          "backdropPath": {
+            "description": "背景图",
+            "type": "string"
+          },
+          "credits": {
+            "$ref": "#/components/schemas/TmdbCredits",
+            "description": "演职人员"
+          },
+          "date": {
+            "description": "首映日期",
+            "format": "date-time",
+            "type": "string"
+          },
+          "genreIds": {
+            "description": "种类",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "genres": {
+            "description": "种类",
+            "items": {
+              "$ref": "#/components/schemas/TmdbGenres"
+            },
+            "type": "array"
+          },
+          "homepage": {
+            "description": "主页",
+            "type": "string"
+          },
+          "id": {
+            "description": "id",
+            "type": "string"
+          },
+          "name": {
+            "description": "名称",
+            "type": "string"
+          },
+          "networks": {
+            "description": "工作室",
+            "items": {
+              "$ref": "#/components/schemas/TmdbNetwork"
+            },
+            "type": "array"
+          },
+          "originCountry": {
+            "description": "原产地",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "originalLanguage": {
+            "description": "原语言",
+            "type": "string"
+          },
+          "originalName": {
+            "description": "原名",
+            "type": "string"
+          },
+          "otherMap": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "其他信息",
+            "type": "object"
+          },
+          "overview": {
+            "description": "概述",
+            "type": "string"
+          },
+          "posterPath": {
+            "description": "封面",
+            "type": "string"
+          },
+          "runtime": {
+            "description": "时长",
+            "format": "int32",
+            "type": "integer"
+          },
+          "tagline": {
+            "description": "宣传语",
+            "type": "string"
+          },
+          "tmdbGroupId": {
+            "description": "剧集组id",
+            "type": "string"
+          },
+          "tmdbType": {
+            "description": "类型",
+            "enum": [
+              "MOVIE",
+              "TV"
+            ],
+            "type": "string"
+          },
+          "translations": {
+            "$ref": "#/components/schemas/TmdbTranslations",
+            "description": "翻译"
+          },
+          "videos": {
+            "description": "预告片",
+            "items": {
+              "$ref": "#/components/schemas/TmdbVideo"
+            },
+            "type": "array"
+          },
+          "voteAverage": {
+            "description": "平均评分",
+            "type": "string"
+          },
+          "voteCount": {
+            "description": "评分人数",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TmdbCredits": {
+        "properties": {
+          "cast": {
+            "items": {
+              "$ref": "#/components/schemas/TmdbCreditsCast"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "TmdbCreditsCast": {
+        "properties": {
+          "adult": {
+            "description": "成人",
+            "type": "boolean"
+          },
+          "character": {
+            "description": "角色",
+            "type": "string"
+          },
+          "creditId": {
+            "description": "演职员ID",
+            "type": "string"
+          },
+          "gender": {
+            "description": "性别",
+            "format": "int32",
+            "type": "integer"
+          },
+          "id": {
+            "description": "id",
+            "format": "int32",
+            "type": "integer"
+          },
+          "knownForDepartment": {
+            "description": "所属部门",
+            "type": "string"
+          },
+          "name": {
+            "description": "名称",
+            "type": "string"
+          },
+          "order": {
+            "description": "排序",
+            "type": "string"
+          },
+          "originalName": {
+            "description": "原名",
+            "type": "string"
+          },
+          "popularity": {
+            "description": "热度",
+            "format": "double",
+            "type": "number"
+          },
+          "profilePath": {
+            "description": "头像路径",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TmdbGenres": {
+        "properties": {
+          "id": {
+            "description": "id",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "名称",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TmdbGroup": {
+        "properties": {
+          "description": {
+            "description": "描述",
+            "type": "string"
+          },
+          "episodeCount": {
+            "description": "集数量",
+            "type": "string"
+          },
+          "groupCount": {
+            "description": "组数量",
+            "type": "string"
+          },
+          "id": {
+            "description": "id",
+            "type": "string"
+          },
+          "name": {
+            "description": "剧集组名",
+            "type": "string"
+          },
+          "type": {
+            "description": "类型",
+            "format": "int32",
+            "type": "integer"
+          },
+          "typeName": {
+            "description": "类型名",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TmdbNetwork": {
+        "properties": {
+          "id": {
+            "description": "id",
+            "type": "string"
+          },
+          "logoPath": {
+            "description": "Logo路径",
+            "type": "string"
+          },
+          "name": {
+            "description": "名称",
+            "type": "string"
+          },
+          "originCountry": {
+            "description": "原产地",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TmdbTranslation": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/TmdbTranslationData"
+          },
+          "englishName": {
+            "type": "string"
+          },
+          "iso31661": {
+            "type": "string"
+          },
+          "iso6391": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TmdbTranslationData": {
+        "properties": {
+          "homepage": {
+            "description": "主页",
+            "type": "string"
+          },
+          "name": {
+            "description": "名称",
+            "type": "string"
+          },
+          "overview": {
+            "description": "概述",
+            "type": "string"
+          },
+          "tagline": {
+            "description": "宣传语",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TmdbTranslations": {
+        "properties": {
+          "translations": {
+            "items": {
+              "$ref": "#/components/schemas/TmdbTranslation"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "TmdbVideo": {
+        "properties": {
+          "id": {
+            "description": "id",
+            "type": "string"
+          },
+          "iso31661": {
+            "description": "国家代码",
+            "type": "string"
+          },
+          "iso6391": {
+            "description": "语言代码",
+            "type": "string"
+          },
+          "key": {
+            "description": "Key",
+            "type": "string"
+          },
+          "name": {
+            "description": "名称",
+            "type": "string"
+          },
+          "official": {
+            "description": "官方",
+            "type": "boolean"
+          },
+          "publishedAt": {
+            "description": "发布时间",
+            "format": "date-time",
+            "type": "string"
+          },
+          "site": {
+            "description": "站点",
+            "type": "string"
+          },
+          "size": {
+            "description": "尺寸",
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": {
+            "description": "类型",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TorrentsInfo": {
+        "description": "种子信息",
+        "properties": {
+          "category": {
+            "description": "分类",
+            "type": "string"
+          },
+          "completed": {
+            "description": "已完成的传输数据量（bytes）",
+            "format": "int64",
+            "type": "integer"
+          },
+          "filesSupplier": {
+            "description": "文件列表"
+          },
+          "formatSize": {
+            "description": "大小(字符串)",
+            "type": "string"
+          },
+          "hash": {
+            "description": "hash",
+            "type": "string"
+          },
+          "id": {
+            "description": "id",
+            "type": "string"
+          },
+          "name": {
+            "description": "名称",
+            "type": "string"
+          },
+          "progress": {
+            "description": "进度",
+            "format": "double",
+            "type": "number"
+          },
+          "savePath": {
+            "description": "下载位置",
+            "type": "string"
+          },
+          "size": {
+            "description": "所选文件的总大小（bytes）",
+            "format": "int64",
+            "type": "integer"
+          },
+          "state": {
+            "description": "状态",
+            "enum": [
+              "unknown",
+              "forcedDL",
+              "downloading",
+              "forcedMetaDL",
+              "metaDL",
+              "stalledDL",
+              "forcedUP",
+              "uploading",
+              "stalledUP",
+              "checkingResumeData",
+              "queuedDL",
+              "queuedUP",
+              "checkingUP",
+              "checkingDL",
+              "stoppedDL",
+              "pausedDL",
+              "stoppedUP",
+              "pausedUP",
+              "moving",
+              "missingFiles",
+              "error",
+              "allocating"
+            ],
+            "type": "string"
+          },
+          "tagList": {
+            "description": "标签",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Week": {
+        "properties": {
+          "items": {
+            "description": "番剧",
+            "items": {
+              "$ref": "#/components/schemas/MikanInfo"
+            },
+            "type": "array"
+          },
+          "weekLabel": {
+            "description": "星期",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "WeekAni": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Ani"
+            },
+            "type": "array"
+          },
+          "weekLabel": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "api-key": {
+        "description": "配置中的 API Key；也接受 x-api-key。",
+        "in": "header",
+        "name": "api-key",
+        "type": "apiKey"
+      },
+      "resource-token": {
+        "description": "资源链接使用的会话令牌或 API Key。",
+        "in": "query",
+        "name": "s",
+        "type": "apiKey"
+      },
+      "session": {
+        "description": "登录返回的原始会话令牌，不加 Bearer 前缀。",
+        "in": "header",
+        "name": "Authorization",
+        "type": "apiKey"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "外部文档",
+    "url": "https://docs.wushuo.top/"
+  },
+  "info": {
+    "contact": {},
+    "description": "业务接口通常返回 HTTP 200，以 JSON 的 code 表示结果：认证失败为 403，业务错误为 500。图片和 ZIP 接口按实际媒体类型及 HTTP 状态返回。登录密码使用 MD5 摘要；会话令牌直接放入 Authorization，不加 Bearer 前缀。",
+    "license": {
+      "name": "GPL-2.0",
+      "url": "https://github.com/jqtmviyu/MyAnimeGo/blob/main/LICENSE"
+    },
+    "title": "MyAnimeGo",
+    "version": "0.1.0-dev"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/addAni": {
+      "post": {
+        "operationId": "addAni",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "override",
+            "required": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ani"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "添加订阅",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/aniBT": {
+      "post": {
+        "operationId": "aniBT",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AniBTQueryDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultAniBT"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "AniBT 番剧列表",
+        "tags": [
+          "ani-bt-controller"
+        ]
+      }
+    },
+    "/api/aniBTGroup": {
+      "post": {
+        "operationId": "aniBTGroup",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "bgmId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListGroup"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ani-bt-controller"
+        ]
+      }
+    },
+    "/api/animeGardenGroup": {
+      "post": {
+        "operationId": "animeGardenGroup",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "bgmId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListGroup"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "AnimeGarden 番剧字幕组列表",
+        "tags": [
+          "anime-garden-controller"
+        ]
+      }
+    },
+    "/api/animeGardenList": {
+      "post": {
+        "operationId": "animeGardenList",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListWeek"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "AnimeGarden 番剧列表",
+        "tags": [
+          "anime-garden-controller"
+        ]
+      }
+    },
+    "/api/batchEnable": {
+      "post": {
+        "operationId": "batchEnable",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "value",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "批量 启用/禁用 订阅",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/clearCache": {
+      "post": {
+        "operationId": "clearCache",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "清理缓存",
+        "tags": [
+          "config-controller"
+        ]
+      }
+    },
+    "/api/clearLogs": {
+      "post": {
+        "operationId": "clearLogs",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "清理日志",
+        "tags": [
+          "logs-controller"
+        ]
+      }
+    },
+    "/api/config": {
+      "post": {
+        "operationId": "config",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultConfig"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "获取设置",
+        "tags": [
+          "config-controller"
+        ]
+      }
+    },
+    "/api/deleteAni": {
+      "post": {
+        "operationId": "deleteAni",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "deleteFiles",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "删除订阅",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/deleteTorrent": {
+      "post": {
+        "operationId": "deleteTorrent",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "hash",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "删除缓存种子",
+        "tags": [
+          "torrent-controller"
+        ]
+      }
+    },
+    "/api/downloadLoginTest": {
+      "post": {
+        "operationId": "downloadLoginTest",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Config"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "下载器测试",
+        "tags": [
+          "config-controller"
+        ]
+      }
+    },
+    "/api/downloadLogs": {
+      "get": {
+        "operationId": "downloadLogs",
+        "responses": {
+          "200": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "返回资源内容"
+          }
+        },
+        "summary": "下载日志",
+        "tags": [
+          "logs-controller"
+        ]
+      }
+    },
+    "/api/downloadPath": {
+      "post": {
+        "operationId": "downloadPath",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ani"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultMapStringObject"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "获取订阅的下载位置",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/exportBackup": {
+      "get": {
+        "operationId": "backupBackup",
+        "responses": {
+          "200": {
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "返回资源内容"
+          }
+        },
+        "summary": "导出备份",
+        "tags": [
+          "backup-controller"
+        ]
+      }
+    },
+    "/api/file": {
+      "get": {
+        "operationId": "file",
+        "parameters": [
+          {
+            "description": "文件相对路径的 Base64 编码；通过查询参数 s 或认证请求头访问。",
+            "in": "query",
+            "name": "filename",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "image/*": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "返回资源内容"
+          }
+        },
+        "summary": "获取文件",
+        "tags": [
+          "file-controller"
+        ]
+      }
+    },
+    "/api/getAniBySubjectId": {
+      "post": {
+        "operationId": "getAniBySubjectId",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultAni"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "将指定id的BGM番剧转换为订阅",
+        "tags": [
+          "bgm-controller"
+        ]
+      }
+    },
+    "/api/getBgmTitle": {
+      "post": {
+        "operationId": "getBgmTitle",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ani"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "获取BGM标题",
+        "tags": [
+          "bgm-controller"
+        ]
+      }
+    },
+    "/api/getCollectionSubgroup": {
+      "post": {
+        "operationId": "getCollectionSubgroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionInfo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "获取合集字幕组",
+        "tags": [
+          "collection-controller"
+        ]
+      }
+    },
+    "/api/getEmbyViews": {
+      "post": {
+        "operationId": "getEmbyViews",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationConfig"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListEmbyViews"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "获取媒体库",
+        "tags": [
+          "emby-controller"
+        ]
+      }
+    },
+    "/api/getThemoviedbGroup": {
+      "post": {
+        "operationId": "getThemoviedbGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ani"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListTmdbGroup"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "获取TMDB剧集组",
+        "tags": [
+          "themoviedb-controller"
+        ]
+      }
+    },
+    "/api/getThemoviedbName": {
+      "post": {
+        "operationId": "getThemoviedbName",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThemoviedbDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultThemoviedbVO"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "获取TMDB标题",
+        "tags": [
+          "themoviedb-controller"
+        ]
+      }
+    },
+    "/api/importAni": {
+      "post": {
+        "operationId": "importAni",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportAniDataDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "导入订阅",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/importBackup": {
+      "post": {
+        "operationId": "importBackup",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "format": "binary",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "file"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "导入备份",
+        "tags": [
+          "backup-controller"
+        ]
+      }
+    },
+    "/api/listAni": {
+      "post": {
+        "operationId": "listAni",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListAni"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "订阅列表",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/login": {
+      "post": {
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "summary": "登录",
+        "tags": [
+          "login-controller"
+        ]
+      }
+    },
+    "/api/logs": {
+      "post": {
+        "operationId": "logs",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListLog"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "日志",
+        "tags": [
+          "logs-controller"
+        ]
+      }
+    },
+    "/api/mikan": {
+      "post": {
+        "operationId": "mikan",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "设为 false 时直接返回 Mikan 目录，不等待 Bangumi 评分补全；字幕组通过 mikanGroup 按需读取。",
+            "in": "query",
+            "name": "metadata",
+            "required": false,
+            "schema": {
+              "default": true,
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Season"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultMikan"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "获取Mikan番剧列表",
+        "tags": [
+          "mikan-controller"
+        ]
+      }
+    },
+    "/api/mikanGroup": {
+      "post": {
+        "operationId": "mikanGroup",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListGroup"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "获取Mikan番剧的字幕组列表",
+        "tags": [
+          "mikan-controller"
+        ]
+      }
+    },
+    "/api/newNotification": {
+      "post": {
+        "operationId": "newNotification",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultNotificationConfig"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "新的通知",
+        "tags": [
+          "notification-controller"
+        ]
+      }
+    },
+    "/api/peerFilter": {
+      "get": {
+        "description": "peerFilter配置通过setConfig保存。GET peerFilter读取配置/运行状态；peerFilterBans分页查询动态记录；POST peerFilterAction执行refresh/apply/scan/release/allow/ban/import/preview。peerFilterFeed使用独立token只读提供当前P2P格式快照。",
+        "responses": {
+          "200": {
+            "description": "管理接口返回Result；Feed返回text/plain名单"
+          }
+        },
+        "summary": "节点过滤规则、封禁与名单管理",
+        "tags": [
+          "transmission"
+        ]
+      }
+    },
+    "/api/peerFilterAction": {
+      "post": {
+        "description": "peerFilter配置通过setConfig保存。GET peerFilter读取配置/运行状态；peerFilterBans分页查询动态记录；POST peerFilterAction执行refresh/apply/scan/release/allow/ban/import/preview。peerFilterFeed使用独立token只读提供当前P2P格式快照。",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "action": {
+                    "enum": [
+                      "refresh",
+                      "apply",
+                      "scan",
+                      "release",
+                      "allow",
+                      "ban",
+                      "import",
+                      "preview"
+                    ],
+                    "type": "string"
+                  },
+                  "ip": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "rules": {
+                    "items": {
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "管理接口返回Result；Feed返回text/plain名单"
+          }
+        },
+        "summary": "节点过滤规则、封禁与名单管理",
+        "tags": [
+          "transmission"
+        ]
+      }
+    },
+    "/api/peerFilterBans": {
+      "get": {
+        "description": "peerFilter配置通过setConfig保存。GET peerFilter读取配置/运行状态；peerFilterBans分页查询动态记录；POST peerFilterAction执行refresh/apply/scan/release/allow/ban/import/preview。peerFilterFeed使用独立token只读提供当前P2P格式快照。",
+        "responses": {
+          "200": {
+            "description": "管理接口返回Result；Feed返回text/plain名单"
+          }
+        },
+        "summary": "节点过滤规则、封禁与名单管理",
+        "tags": [
+          "transmission"
+        ]
+      }
+    },
+    "/api/peerFilterFeed": {
+      "get": {
+        "description": "peerFilter配置通过setConfig保存。GET peerFilter读取配置/运行状态；peerFilterBans分页查询动态记录；POST peerFilterAction执行refresh/apply/scan/release/allow/ban/import/preview。peerFilterFeed使用独立token只读提供当前P2P格式快照。",
+        "parameters": [
+          {
+            "description": "只允许读取当前名单的独立凭据",
+            "in": "query",
+            "name": "token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "管理接口返回Result；Feed返回text/plain名单"
+          }
+        },
+        "security": [],
+        "summary": "节点过滤规则、封禁与名单管理",
+        "tags": [
+          "transmission"
+        ]
+      }
+    },
+    "/api/ping": {
+      "delete": {
+        "operationId": "ping_3",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "summary": "存活测试",
+        "tags": [
+          "config-controller"
+        ]
+      },
+      "get": {
+        "operationId": "ping",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "summary": "存活测试",
+        "tags": [
+          "config-controller"
+        ]
+      },
+      "head": {
+        "operationId": "ping_5",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "summary": "存活测试",
+        "tags": [
+          "config-controller"
+        ]
+      },
+      "options": {
+        "operationId": "ping_6",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "summary": "存活测试",
+        "tags": [
+          "config-controller"
+        ]
+      },
+      "patch": {
+        "operationId": "ping_4",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "summary": "存活测试",
+        "tags": [
+          "config-controller"
+        ]
+      },
+      "post": {
+        "operationId": "ping_1",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "summary": "存活测试",
+        "tags": [
+          "config-controller"
+        ]
+      },
+      "put": {
+        "operationId": "ping_2",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "summary": "存活测试",
+        "tags": [
+          "config-controller"
+        ]
+      }
+    },
+    "/api/previewAni": {
+      "post": {
+        "operationId": "previewAni",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ani"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultMapStringObject"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "预览订阅",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/previewCollection": {
+      "post": {
+        "operationId": "previewCollection",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionInfo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListItem"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "合集预览",
+        "tags": [
+          "collection-controller"
+        ]
+      }
+    },
+    "/api/proxyImage": {
+      "get": {
+        "operationId": "proxyImage",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "imgUrl",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "image/*": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "返回资源内容"
+          }
+        },
+        "summary": "下载并缓存图片",
+        "tags": [
+          "proxy-image-controller"
+        ]
+      }
+    },
+    "/api/refreshAll": {
+      "post": {
+        "description": "处理意图先保存到持久队列，成功响应表示已入队。",
+        "operationId": "refreshAll",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "刷新全部订阅",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/refreshAni": {
+      "post": {
+        "description": "处理意图先保存到持久队列，成功响应表示已入队。",
+        "operationId": "refreshAni",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IdDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "刷新订阅",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/refreshCover": {
+      "post": {
+        "operationId": "refreshCover",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ani"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "刷新封面",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/rssToAni": {
+      "post": {
+        "operationId": "rssToAni",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RssToAniDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultAni"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "将RSS转换为订阅",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/searchBgm": {
+      "post": {
+        "operationId": "searchBgm",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListBgmInfo"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "搜索BGM条目",
+        "tags": [
+          "bgm-controller"
+        ]
+      }
+    },
+    "/api/setAni": {
+      "post": {
+        "operationId": "setAni",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ani"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "修改订阅",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/setAutomaticTasksPaused": {
+      "post": {
+        "description": "仅在 -dev 开发模式挂载；生产环境自动运行任务，不提供总暂停入口。",
+        "operationId": "setAutomaticTasksPaused",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "paused": {
+                    "type": "boolean"
+                  },
+                  "reviewed": {
+                    "description": "启用时必须为 true",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "paused"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "业务状态由 code 表示，成功 data 包含 automaticTasksPaused"
+          }
+        },
+        "summary": "手动启用或暂停自动任务",
+        "tags": [
+          "config"
+        ]
+      }
+    },
+    "/api/setConfig": {
+      "post": {
+        "operationId": "setConfig",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Config"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "修改设置",
+        "tags": [
+          "config-controller"
+        ]
+      }
+    },
+    "/api/startCollection": {
+      "post": {
+        "description": "处理意图先保存到持久队列，成功响应表示已入队。",
+        "operationId": "startCollection",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionInfo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultJob"
+                }
+              }
+            },
+            "description": "已入队或返回业务错误"
+          }
+        },
+        "summary": "开始下载合集",
+        "tags": [
+          "collection-controller"
+        ]
+      }
+    },
+    "/api/stop": {
+      "post": {
+        "operationId": "stop",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "停止服务",
+        "tags": [
+          "about-controller"
+        ]
+      }
+    },
+    "/api/testIpWhitelist": {
+      "post": {
+        "operationId": "testIpWhitelist",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "summary": "IP白名单测试",
+        "tags": [
+          "about-controller"
+        ]
+      }
+    },
+    "/api/testNotification": {
+      "post": {
+        "operationId": "testNotification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationConfig"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "测试通知",
+        "tags": [
+          "notification-controller"
+        ]
+      }
+    },
+    "/api/testProxy": {
+      "post": {
+        "operationId": "testProxy",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Config"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultProxyTest"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "代理测试",
+        "tags": [
+          "config-controller"
+        ]
+      }
+    },
+    "/api/torrentsInfos": {
+      "post": {
+        "operationId": "torrentsInfos",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListTorrentsInfo"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "下载列表",
+        "tags": [
+          "torrents-infos-controller"
+        ]
+      }
+    },
+    "/api/trackersUpdate": {
+      "post": {
+        "operationId": "trackersUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Config"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "更新trackers",
+        "tags": [
+          "config-controller"
+        ]
+      }
+    },
+    "/api/transmissionRPC": {
+      "post": {
+        "description": "复用服务端下载器连接。方法和参数按白名单校验；torrent-get 的字段由后端决定，details=true 时要求一个任务 ID。写入操作不自动重试。torrent-rename-preview 与 torrent-rename-batch 是 MyAnimeGo 的目录文件重命名操作，使用 rename 对象；前者返回计划，后者重读路径并逐项提交。",
+        "operationId": "transmissionRPC",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "arguments": {
+                    "description": "任务操作需要非空 ids 数组，最多 200 项。文件索引数组必须非空；删除的 delete-local-data 默认 false。添加使用 filename（magnet/HTTP/HTTPS）或 metainfo（二选一）。",
+                    "type": "object"
+                  },
+                  "columns": {
+                    "description": "列表可见列及排序字段，按白名单选择；必需的状态字段始终读取",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "details": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "freshFiles": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "method": {
+                    "enum": [
+                      "torrent-get",
+                      "session-get",
+                      "session-stats",
+                      "torrent-start",
+                      "torrent-start-now",
+                      "torrent-stop",
+                      "torrent-verify",
+                      "torrent-reannounce",
+                      "queue-move-top",
+                      "queue-move-bottom",
+                      "queue-move-up",
+                      "queue-move-down",
+                      "torrent-remove",
+                      "torrent-set",
+                      "session-set",
+                      "torrent-add",
+                      "torrent-rename-path",
+                      "torrent-rename-preview",
+                      "torrent-rename-batch",
+                      "torrent-set-location",
+                      "free-space",
+                      "port-test",
+                      "blocklist-update",
+                      "group-get",
+                      "group-set"
+                    ],
+                    "type": "string"
+                  },
+                  "rename": {
+                    "description": "目录内文件重命名。Go/RE2 正则，预览只读；批量执行需携带预览 hash 和选中行 items，最多500项。目标已存在时标记冲突。",
+                    "properties": {
+                      "directory": {
+                        "description": "任务内相对目录，空值为所有文件夹",
+                        "type": "string"
+                      },
+                      "hash": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "ignoreCase": {
+                        "type": "boolean"
+                      },
+                      "items": {
+                        "items": {
+                          "properties": {
+                            "index": {
+                              "type": "integer"
+                            },
+                            "message": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "path": {
+                              "type": "string"
+                            },
+                            "status": {
+                              "type": "string"
+                            },
+                            "target": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "index",
+                            "path",
+                            "target"
+                          ],
+                          "type": "object"
+                        },
+                        "maxItems": 500,
+                        "type": "array"
+                      },
+                      "mediaOnly": {
+                        "type": "boolean"
+                      },
+                      "mode": {
+                        "enum": [
+                          "episode",
+                          "replace"
+                        ],
+                        "type": "string"
+                      },
+                      "pattern": {
+                        "type": "string"
+                      },
+                      "preserveExtension": {
+                        "type": "boolean"
+                      },
+                      "recursive": {
+                        "type": "boolean"
+                      },
+                      "replacement": {
+                        "description": "Go替换模板：$1、${1}、$0、$$",
+                        "type": "string"
+                      },
+                      "season": {
+                        "maximum": 999,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "seasonPattern": {
+                        "description": "目录季度正则，第一组捕获季度",
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "mode",
+                      "pattern"
+                    ],
+                    "type": "object"
+                  },
+                  "trackers": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "view": {
+                    "description": "详情分类，仅请求该分类需要的明细",
+                    "enum": [
+                      "",
+                      "overview",
+                      "files",
+                      "trackers",
+                      "peers",
+                      "options",
+                      "pieces",
+                      "settings",
+                      "magnets"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "method"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "t": {
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "统一 Result 包装，data 为 Transmission RPC arguments；code=400 表示参数错误，502 表示上游失败。"
+          }
+        },
+        "summary": "读取和管理 Transmission 下载任务",
+        "tags": [
+          "transmission"
+        ]
+      }
+    },
+    "/api/updateTotalEpisodeNumber": {
+      "post": {
+        "operationId": "updateTotalEpisodeNumber",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "force",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "更新总集数",
+        "tags": [
+          "ani-controller"
+        ]
+      }
+    },
+    "/api/upload": {
+      "post": {
+        "operationId": "upload_1",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "format": "binary",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "file"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "上传文件",
+        "tags": [
+          "upload-controller"
+        ]
+      }
+    },
+    "/api/uploadAndRead": {
+      "post": {
+        "operationId": "uploadAndRead",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "format": "binary",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "file"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "上传并读取",
+        "tags": [
+          "upload-controller"
+        ]
+      }
+    },
+    "/api/uploadAndReadToBase64": {
+      "post": {
+        "operationId": "uploadAndReadToBase64",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "format": "binary",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "file"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "上传并读取为 base64",
+        "tags": [
+          "upload-controller"
+        ]
+      }
+    },
+    "/api/verifyNo": {
+      "post": {
+        "operationId": "verifyNo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "outTradeNo": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "outTradeNo"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            },
+            "description": "校验结果，授权状态由真实上游结果决定"
+          }
+        },
+        "summary": "校验赞助订单",
+        "tags": [
+          "authorization"
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "api-key": []
+    },
+    {
+      "session": []
+    },
+    {
+      "resource-token": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "/"
+    }
+  ]
+}

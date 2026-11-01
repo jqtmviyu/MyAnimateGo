@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict'
+import {normalizeAnibt, normalizeAnibtGroups, anibtSubscribedIds, anibtToday, anibtTime, anibtSeasonOptions} from '../src/lib/anibt-catalog.js'
+const data = normalizeAnibt({byWeekday:[{weekday:0,weekdayLabel:'周日',animes:[{bgmId:1,title:{primary:'作品'},rssReleaseCount:0}]},{weekday:null,weekdayLabel:'未排播',animes:[{bgmId:2,title:{chinese:'中文',primary:'Title'}}]}]})
+assert.equal(data[0].weekLabel,'星期日')
+assert.equal(data[1].weekLabel,'未排播','未排播不能误归入星期日')
+assert.equal(data[1].weekday,-1)
+assert.equal(data[0].items.length,1,'暂无资源的作品也展示在时间表')
+assert.equal(data[1].items[0].title,'中文')
+assert.equal(anibtToday(new Date('2026-10-25T16:00:00Z'), 'Asia/Tokyo'),1,'日期按日本时间跨日')
+assert.equal(anibtTime(Date.parse('2026-10-25T16:00:00Z')/1000, 'Asia/Tokyo'),'01:00')
+const ids=anibtSubscribedIds([{url:'https://anibt.net/rss/anime.xml?bgmId=123&groupSlug=x'},{url:'https://mikanani.me/RSS/Bangumi?bangumiId=2',bgmUrl:'https://bgm.tv/subject/456'}])
+assert(ids.has('123'));assert(ids.has('456'))
+const groups=normalizeAnibtGroups([{name:'字幕组',bgmId:123,slug:'fansub',rss:'https://anibt.net/rss/anime.xml?bgmId=123&groupSlug=fansub',items:[{publishedAt:1786863045049,title:'资源',magnet:'magnet:?xt=test'}]}])
+assert.equal(groups[0].label,'字幕组');assert.equal(groups[0].bgmId,'123');assert(groups[0].items[0].createdAt);assert.equal(groups[0].items[0].magnet,'magnet:?xt=test')
+console.log('Anibt 未排播分类、空资源、时区、跨来源订阅标记及字幕组映射通过')
+
+assert.deepEqual(anibtSeasonOptions('2026秋').map(item=>item.seasonLabel),['2026夏','2026秋','2027冬'])
+assert.deepEqual(anibtSeasonOptions('2027冬').map(item=>item.seasonLabel),['2026秋','2027冬','2027春'])
+assert.equal(anibtSeasonOptions('2026秋')[1].label,'2026 秋季（当前季度）')
+console.log('Anibt 三季度窗口、当季名称和跨年选项通过')

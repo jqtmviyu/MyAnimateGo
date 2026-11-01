@@ -1,0 +1,27 @@
+name: 问题报告
+description: 报告 Go / Vue 版本的问题
+labels: [bug]
+body:
+  - type: input
+    id: commit
+    attributes:
+      label: 构建提交
+      description: 填写使用的 Git 提交或构建日期
+  - type: input
+    id: platform
+    attributes:
+      label: 运行环境
+      placeholder: Linux / macOS / Windows，CPU 架构，浏览器
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤与预期结果
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志与截图
+      description: 请先移除账号、令牌和实例连接凭据
