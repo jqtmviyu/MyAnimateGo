@@ -22,9 +22,19 @@
     </div>
   </AppModal>
   <AppModal v-model="dialogVisible" center title="AnimeGarden">
-    <AppCheckboxGroup v-model="rssList">
+    <AppCheckboxGroup v-model="rssList" class="w-full min-w-0 flex-col items-stretch">
       <div class="content-wrapper">
         <div class="search-section">
+          <div class="search-header">
+            <AppInput v-model:model-value="text" clearable placeholder="请输入搜索标题"
+                      prefix-icon="Search"
+                      @clear="()=>{
+                        text = ''
+                        search()
+                      }"
+                      @keyup.enter="search"/>
+            <AppButton :loading="searchLoading" bg icon="Search" text @click="search">搜索</AppButton>
+          </div>
           <div class="flex season-selector">
             <AppButton :disabled="rssList.length < 1" bg icon="Plus" text @click="batchAddition">批量添加</AppButton>
           </div>
@@ -36,7 +46,7 @@
               <AppScroll class="week-pane-scrollbar">
                 <div class="collapse-content">
                   <AppFold accordion @change="collapseChange">
-                    <AppFoldItem v-for="anime in item.subjects" :name="anime.id">
+                    <AppFoldItem v-for="anime in item.subjects" :key="anime.id" :name="anime.id">
                       <template #title>
                         <div class="flex collapse-title">
                           <img :src="proxyImage(anime['cover'])" class="cover" v-if="anime.cover"
@@ -52,14 +62,12 @@
                               {{ anime['score'].toFixed(1) }}
                             </h4>
                           </div>
-                          <AppBadge v-if="anime['exists']" class="item badge-margin" type="primary"
-                                    value="已订阅"/>
                         </div>
                       </template>
                       <div v-if="selectName === anime.id" v-busy="groupLoading"
                            class="group-content">
                         <AppFold accordion>
-                          <AppFoldItem v-for="group in groups[anime.id]">
+                          <AppFoldItem v-for="(group,index) in groups[anime.id]" :key="groupAccordionKey(group,index)" :name="groupAccordionKey(group,index)">
                             <template #title>
                               <div class="group-title-wrapper">
                                 <div class="group-checkbox-wrapper">
@@ -143,23 +151,39 @@ let groupLoading = ref(false)
 let activeName = ref("")
 let dialogVisible = ref(false)
 let loading = ref(false)
+let searchLoading = ref(false)
+let text = ref('')
 let data = ref({
   'items': []
 })
 
 let show = (bgmUrl = '') => {
   dialogVisible.value = true
+  text.value = ''
   data.value = {
     'items': []
   }
   rssList.value = []
   batchMatchMap.value = {}
+  groups.value = {}
+  selectName.value = ''
   list(bgmUrl)
 }
 
-let list = async (bgmUrl = '') => {
+let search = () => {
+  if (text.value.length === 1) {
+    notify.error("搜索最少需要两个字符")
+    return
+  }
+  searchLoading.value = true
+  list('', text.value).finally(() => {
+    searchLoading.value = false
+  })
+}
+
+let list = async (bgmUrl = '', query = '') => {
   loading.value = true
-  return http.animeGardenList(bgmUrl)
+  return http.animeGardenList(bgmUrl, query)
       .then(res => {
         let items = res.data;
 
@@ -179,6 +203,7 @@ let list = async (bgmUrl = '') => {
 
 let selectName = ref('')
 let groups = ref({})
+let groupAccordionKey = (group, index) => `${group.id || group.name || 'group'}-${index}`
 
 let collapseChange = (v) => {
   if (!v) {
@@ -335,6 +360,12 @@ let copy = (v) => {
   margin:4px;
 }
 
+.search-header {
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+}
+
 .season-selector {
   margin-top:8px;
   width:100%;
@@ -374,10 +405,6 @@ let copy = (v) => {
 
 .score-color {
   color:var(--source-mikan);
-}
-
-.badge-margin {
-  margin-left:4px;
 }
 
 .group-content {

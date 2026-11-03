@@ -22,7 +22,7 @@
     </div>
   </AppModal>
   <AppModal v-model="dialogVisible" center title="Mikan">
-    <AppCheckboxGroup v-model="rssList">
+    <AppCheckboxGroup v-model="rssList" class="w-full min-w-0 flex-col items-stretch">
       <div class="content-wrapper">
         <div class="search-section">
           <div class="search-header">
@@ -52,7 +52,7 @@
               <AppScroll class="week-pane-scrollbar">
                 <div class="collapse-content">
                   <AppFold accordion @change="collapseChange">
-                    <AppFoldItem v-for="it in week.items" :name="it.url">
+                    <AppFoldItem v-for="it in week.items" :key="it.url" :name="it.url">
                       <template #title>
                         <div class="flex collapse-title">
                           <img :src="proxyImage(it['cover'])" class="cover" @click.stop="open(it.url)">
@@ -67,14 +67,12 @@
                               {{ it['score'].toFixed(1) }}
                             </h4>
                           </div>
-                          <AppBadge v-if="it['exists']" class="item badge-margin" type="primary"
-                                    value="已订阅"/>
                         </div>
                       </template>
                       <div v-if="selectName === it.url" v-busy="groupLoading"
                            class="group-content">
                         <AppFold accordion>
-                          <AppFoldItem v-for="group in groups[it.url]">
+                          <AppFoldItem v-for="(group,index) in groups[it.url]" :key="groupAccordionKey(group,index)" :name="groupAccordionKey(group,index)">
                             <template #title>
                               <div class="group-title-wrapper">
                                 <div class="group-checkbox-wrapper">
@@ -256,6 +254,7 @@ let change = (v) => {
 
 let selectName = ref('')
 let groups = ref({})
+let groupAccordionKey = (group, index) => `${group.subgroupId || group.rss || 'group'}-${index}`
 
 let collapseChange = (v) => {
   if (!v) {
@@ -458,10 +457,6 @@ let openUrl = (url) => window.open(url)
 
 .score-color {
   color:var(--source-mikan);
-}
-
-.badge-margin {
-  margin-left:4px;
 }
 
 .group-content {

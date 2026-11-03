@@ -144,7 +144,7 @@ func (c *Client) aniBTGroupRoute(r *http.Request) (any, string, error) {
 }
 
 func (c *Client) animeGardenListRoute(r *http.Request) (any, string, error) {
-	data, err := c.searchAnimeGarden(r.Context(), r.URL.Query().Get("bgmUrl"))
+	data, err := c.searchAnimeGarden(r.Context(), r.URL.Query().Get("bgmUrl"), r.URL.Query().Get("text"))
 	return data, "success", err
 }
 

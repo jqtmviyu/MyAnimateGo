@@ -41,7 +41,7 @@ func (c *Client) SearchAniBT(ctx context.Context, input AniBTSearchInput) (any, 
 
 // SearchAnimeGarden 返回 AnimeGarden 搜索结果，供 JSON API 和 MCP 共用。
 func (c *Client) SearchAnimeGarden(ctx context.Context, bgmURL string) (any, error) {
-	return c.searchAnimeGarden(ctx, bgmURL)
+	return c.searchAnimeGarden(ctx, bgmURL, "")
 }
 
 // GetMikanGroups 返回一个 Mikan 页面上的字幕组 RSS。

@@ -390,8 +390,7 @@ let animeGardenShow = () => {
 }
 
 let aniBTShow = () => {
-  let bgmUrl = props.ani.bgmUrl;
-  aniBTRef.value?.show(bgmUrl)
+  aniBTRef.value?.show(props.ani)
 }
 
 let openUrl = (url) => window.open(url)

@@ -12,7 +12,7 @@ import (
 
 const defaultAnimeGardenHost = "https://api.animes.garden"
 
-func (c *Client) searchAnimeGarden(ctx context.Context, bgmURL string) ([]animeGardenWeek, error) {
+func (c *Client) searchAnimeGarden(ctx context.Context, bgmURL, queryText string) ([]animeGardenWeek, error) {
 	config, err := c.config(ctx)
 	if err != nil {
 		return nil, err
@@ -39,14 +39,24 @@ func (c *Client) searchAnimeGarden(ctx context.Context, bgmURL string) ([]animeG
 	if envelope.Subjects == nil {
 		return nil, fmt.Errorf("AnimeGarden 响应缺少 subjects")
 	}
+	subjects := envelope.Subjects
+	if query := strings.ToLower(strings.TrimSpace(queryText)); query != "" {
+		filtered := make([]animeGardenSubject, 0, len(subjects))
+		for _, subject := range subjects {
+			if animeGardenSubjectMatches(subject, query) {
+				filtered = append(filtered, subject)
+			}
+		}
+		subjects = filtered
+	}
 	subs, err := c.subscriptions(ctx)
 	if err != nil {
 		return nil, err
 	}
-	c.enrichAnimeGarden(ctx, config, envelope.Subjects)
+	c.enrichAnimeGarden(ctx, config, subjects)
 	ids := subscribedBgmIDs(subs)
 	byWeek := map[string][]animeGardenSubject{}
-	for _, subject := range envelope.Subjects {
+	for _, subject := range subjects {
 		subject.Exists = ids[subject.ID]
 		if subject.ActivedAt != nil {
 			subject.WeekLabel = weekLabel(dayIndex(subject.ActivedAt.Time))
@@ -66,6 +76,15 @@ func (c *Client) searchAnimeGarden(ctx context.Context, bgmURL string) ([]animeG
 	}
 	sortWeeks(weeks, func(w animeGardenWeek) string { return w.WeekLabel })
 	return weeks, nil
+}
+
+func animeGardenSubjectMatches(subject animeGardenSubject, query string) bool {
+	for _, value := range append([]string{subject.ID, subject.Name}, subject.Keywords...) {
+		if strings.Contains(strings.ToLower(value), query) {
+			return true
+		}
+	}
+	return false
 }
 
 func (c *Client) animeGardenGroups(ctx context.Context, bgmID string) ([]animeGardenGroup, error) {

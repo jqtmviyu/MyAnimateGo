@@ -22,7 +22,7 @@
     </div>
   </AppModal>
   <AppModal v-model="dialogVisible" center title="AniBT">
-    <AppCheckboxGroup v-model="rssList">
+    <AppCheckboxGroup v-model="rssList" class="w-full min-w-0 flex-col items-stretch">
       <div class="content-wrapper">
         <div class="search-section">
           <div class="search-header">
@@ -69,14 +69,12 @@
                               {{ anime['rating'].toFixed(1) }}
                             </h4>
                           </div>
-                          <AppBadge v-if="anime['exists']" class="item badge-margin" type="primary"
-                                    value="已订阅"/>
                         </div>
                       </template>
                       <div v-if="selectName === anime.bgmId" v-busy="groupLoading"
                            class="group-content">
                         <AppFold accordion>
-                          <AppFoldItem v-for="group in groups[anime.bgmId]">
+                          <AppFoldItem v-for="(group,index) in groups[anime.bgmId]" :key="groupAccordionKey(group,index)" :name="groupAccordionKey(group,index)">
                             <template #title>
                               <div class="group-title-wrapper">
                                 <div class="group-checkbox-wrapper">
@@ -167,7 +165,11 @@ let data = ref({
 
 let season = ref('')
 
-let show = (bgmUrl = '') => {
+let show = (aniOrBgmUrl = '') => {
+  const ani = typeof aniOrBgmUrl === 'object' && aniOrBgmUrl !== null ? aniOrBgmUrl : null
+  const bgmUrl = ani ? ani.bgmUrl || '' : aniOrBgmUrl
+  title.value = ani ? searchTitle(ani) : ''
+  season.value = ''
   dialogVisible.value = true
   data.value = {
     'seasons': [],
@@ -175,10 +177,17 @@ let show = (bgmUrl = '') => {
   }
   rssList.value = []
   batchMatchMap.value = {}
+  groups.value = {}
+  selectName.value = ''
   search(bgmUrl)
 }
 
 let title = ref('')
+let searchTitle = ani => {
+  let value = ani.aniBTTitle || ani.title || ''
+  value = value.replace(/ ?\((19|20)\d{2}\)/g, '').trim()
+  return value.replace(/ ?\[tmdbid=(\d+)\]/g, '').trim()
+}
 let searchLoading = ref(false)
 
 let search = async (bgmUrl = '') => {
@@ -210,6 +219,7 @@ let change = (v) => {
 
 let selectName = ref('')
 let groups = ref({})
+let groupAccordionKey = (group, index) => `${group.groupId || group.slug || group.rss || 'group'}-${index}`
 
 let collapseChange = (v) => {
   if (!v) {
@@ -409,10 +419,6 @@ let copy = (v) => {
 
 .score-color {
   color:var(--source-mikan);
-}
-
-.badge-margin {
-  margin-left:4px;
 }
 
 .group-content {

@@ -73,7 +73,7 @@ export let aniBTGroup = (url) => api.post(`api/aniBTGroup?bgmId=${url}`)
  * 获取AnimeGarden番剧列表
  * @returns {Promise<unknown>}
  */
-export let animeGardenList = (bgmUrl) => api.post(`api/animeGardenList?bgmUrl=${bgmUrl}`)
+export let animeGardenList = (bgmUrl = '', text = '') => api.post(`api/animeGardenList?bgmUrl=${encodeURIComponent(bgmUrl || '')}&text=${encodeURIComponent(text || '')}`)
 
 /**
  * 获取AnimeGarden番剧的字幕组列表
