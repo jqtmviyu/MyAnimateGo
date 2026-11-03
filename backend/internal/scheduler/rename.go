@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/jqtmviyu/MyAnimeGo/backend/internal/jobs"
 	"github.com/jqtmviyu/MyAnimeGo/backend/internal/pipeline"
@@ -24,8 +25,25 @@ type renamePayload struct {
 
 type renameScanHandler struct{ runtime *Runtime }
 
-func (h renameScanHandler) Reconcile(context.Context, jobs.Job) (bool, error) {
-	return false, nil
+func (h renameScanHandler) Reconcile(ctx context.Context, job jobs.Job) (bool, error) {
+	var payload struct {
+		ScheduledAt int64 `json:"scheduledAt"`
+	}
+	if err := json.Unmarshal(job.Payload, &payload); err != nil {
+		return false, err
+	}
+	if payload.ScheduledAt == 0 {
+		return false, nil
+	}
+	config, err := h.runtime.store.GetConfig(ctx)
+	if err != nil {
+		return false, err
+	}
+	interval := time.Duration(valueInt(config["renameSleepSeconds"])) * time.Second
+	if interval <= 0 {
+		interval = time.Minute
+	}
+	return h.runtime.options.Now().Sub(time.Unix(payload.ScheduledAt, 0)) > interval, nil
 }
 
 func (h renameScanHandler) Execute(ctx context.Context, _ jobs.Job) error {
