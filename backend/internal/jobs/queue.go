@@ -23,6 +23,13 @@ type Job struct {
 	LeaseUntil  time.Time       `json:"leaseUntil"`
 }
 
+// EnqueueRequest 描述随业务状态变更一起保存的持久任务。
+type EnqueueRequest struct {
+	Kind    string
+	Key     string
+	Payload json.RawMessage
+}
+
 type Store interface {
 	// ClaimJob returns a fresh Job.Owner fencing token for each successful claim.
 	ClaimJob(context.Context, string, time.Time, time.Duration) (*Job, error)

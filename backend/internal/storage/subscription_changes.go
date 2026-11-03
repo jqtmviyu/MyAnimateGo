@@ -7,7 +7,30 @@ import (
 	"encoding/json"
 	"errors"
 	"time"
+
+	"github.com/jqtmviyu/MyAnimeGo/backend/internal/jobs"
 )
+
+// UpdateSubscriptionFieldsAndEnqueue 在同一事务中合并订阅字段并保存所有后续任务。
+func (s *Store) UpdateSubscriptionFieldsAndEnqueue(ctx context.Context, id string, fields map[string]any, requests []jobs.EnqueueRequest) error {
+	if id == "" || len(requests) == 0 {
+		return errors.New("订阅更新任务缺少 ID 或后续任务")
+	}
+	tx, err := s.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+	if err := patchSubscriptionFields(ctx, tx, id, fields); err != nil {
+		return err
+	}
+	for _, request := range requests {
+		if err := enqueueJob(ctx, tx, request); err != nil {
+			return err
+		}
+	}
+	return tx.Commit()
+}
 
 // ReplaceSubscriptionsAndScheduleRefresh 在同一事务中保存订阅和创建后的刷新意图。
 func (s *Store) ReplaceSubscriptionsAndScheduleRefresh(ctx context.Context, subscriptions []map[string]any, subscriptionID, eventKey string) error {

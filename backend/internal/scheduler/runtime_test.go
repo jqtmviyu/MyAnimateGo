@@ -15,6 +15,7 @@ import (
 	"github.com/jqtmviyu/MyAnimeGo/backend/internal/jobs"
 	"github.com/jqtmviyu/MyAnimeGo/backend/internal/pipeline"
 	"github.com/jqtmviyu/MyAnimeGo/backend/internal/scheduler"
+	"github.com/jqtmviyu/MyAnimeGo/backend/internal/server"
 	"github.com/jqtmviyu/MyAnimeGo/backend/internal/storage"
 )
 
@@ -66,6 +67,112 @@ func TestRuntimeRestoresRegisteredBusinessTask(t *testing.T) {
 			t.Fatalf("业务任务未恢复：%+v", current)
 		}
 		time.Sleep(time.Millisecond)
+	}
+}
+
+func TestEditSubscriptionRSSURLRefreshesNewFeed(t *testing.T) {
+	ctx := context.Background()
+	firstHash, secondHash := strings.Repeat("a", 40), strings.Repeat("b", 40)
+	oldURL, newURL := "https://old.example/rss", "https://new.example/rss"
+	feed := `<rss><channel><item><title>Show - 11</title><enclosure url="magnet:?xt=urn:btih:` + firstHash + `"/><guid>` + firstHash + `</guid></item><item><title>Show - 12</title><enclosure url="magnet:?xt=urn:btih:` + secondHash + `"/><guid>` + secondHash + `</guid></item></channel></rss>`
+
+	var mu sync.Mutex
+	var fetched []string
+	var added []string
+	torrents := []map[string]any{}
+	rpc := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Header.Get("X-Transmission-Session-Id") == "" {
+			w.Header().Set("X-Transmission-Session-Id", "edit-session")
+			w.WriteHeader(http.StatusConflict)
+			return
+		}
+		var request struct {
+			Method    string         `json:"method"`
+			Arguments map[string]any `json:"arguments"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+			t.Errorf("decode RPC request: %v", err)
+			return
+		}
+		mu.Lock()
+		defer mu.Unlock()
+		switch request.Method {
+		case "torrent-get":
+			writeRPC(w, map[string]any{"torrents": torrents})
+		case "torrent-add":
+			magnet, _ := request.Arguments["filename"].(string)
+			hash := strings.TrimPrefix(magnet, "magnet:?xt=urn:btih:")
+			added = append(added, hash)
+			torrents = append(torrents, map[string]any{
+				"id": len(added), "hashString": hash, "name": "Show", "status": 4,
+				"labels": []string{"ani-rss"}, "isFinished": false, "totalSize": int64(100), "haveValid": int64(0),
+			})
+			writeRPC(w, map[string]any{"torrent-added": map[string]any{"hashString": hash}})
+		default:
+			t.Errorf("unexpected RPC method %q", request.Method)
+			writeRPC(w, map[string]any{})
+		}
+	}))
+	defer rpc.Close()
+
+	store, err := storage.Open(filepath.Join(t.TempDir(), "state.db"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	if err := store.SaveConfig(ctx, map[string]any{
+		"automaticTasksPaused": false, "rss": false, "rename": false,
+		"downloadToolHost": rpc.URL, "downloadPathTemplate": filepath.Join(store.DataDir(), "downloads", "${title}"),
+		"downloadRetry": float64(1),
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if err := store.PutSubscription(ctx, map[string]any{
+		"id": "edited-sub", "url": oldURL, "title": "Show", "season": float64(1), "offset": float64(0),
+		"subgroup": "Demo", "enable": true, "ova": false, "globalExclude": false,
+		"match": []any{}, "exclude": []any{}, "standbyRssList": []any{}, "notDownload": []any{},
+		"currentEpisodeNumber": float64(10), "lastDownloadTime": float64(100),
+	}); err != nil {
+		t.Fatal(err)
+	}
+	api, err := server.New(ctx, store)
+	if err != nil {
+		t.Fatal(err)
+	}
+	engine, err := pipeline.New(store, pipeline.Options{RSSFetcher: func(_ context.Context, source string) ([]byte, error) {
+		mu.Lock()
+		fetched = append(fetched, source)
+		mu.Unlock()
+		if source != newURL {
+			return nil, errors.New("refreshed stale RSS URL")
+		}
+		return []byte(feed), nil
+	}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	runtime, err := scheduler.New(store, scheduler.Options{Engine: engine})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := api.UpdateSubscription(ctx, map[string]any{"id": "edited-sub", "title": "Show", "url": newURL}, false); err != nil {
+		t.Fatal(err)
+	}
+
+	processed, err := runtime.RunOnce(ctx)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !processed {
+		t.Fatal("修改 RSS 地址后没有排入刷新任务")
+	}
+	mu.Lock()
+	defer mu.Unlock()
+	if len(fetched) != 1 || fetched[0] != newURL {
+		t.Fatalf("RSS fetches = %v, want exactly %q", fetched, newURL)
+	}
+	if len(added) != 2 || added[0] == added[1] {
+		t.Fatalf("Transmission added hashes = %v, want both new episodes", added)
 	}
 }
 

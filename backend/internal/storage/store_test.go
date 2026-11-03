@@ -2,11 +2,13 @@ package storage_test
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"path/filepath"
 	"testing"
 	"time"
 
+	"github.com/jqtmviyu/MyAnimeGo/backend/internal/jobs"
 	"github.com/jqtmviyu/MyAnimeGo/backend/internal/storage"
 )
 
@@ -179,6 +181,33 @@ func TestReplaceSubscriptionsIsAtomic(t *testing.T) {
 	subs, err := store.ListSubscriptions(ctx)
 	if err != nil || len(subs) != 1 || subs[0]["id"] != "old" {
 		t.Fatalf("failed replacement changed existing records: %#v, %v", subs, err)
+	}
+}
+
+func TestUpdateSubscriptionFieldsAndEnqueueRollsBackTogether(t *testing.T) {
+	ctx := context.Background()
+	store, err := storage.Open(filepath.Join(t.TempDir(), "state.db"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	if err := store.PutSubscription(ctx, map[string]any{"id": "sub", "url": "https://old.example/rss"}); err != nil {
+		t.Fatal(err)
+	}
+	requests := []jobs.EnqueueRequest{
+		{Kind: "rss-refresh", Key: "first", Payload: json.RawMessage(`{"subscriptionId":"sub"}`)},
+		{Kind: "", Key: "invalid", Payload: json.RawMessage(`{}`)},
+	}
+	if err := store.UpdateSubscriptionFieldsAndEnqueue(ctx, "sub", map[string]any{"url": "https://new.example/rss"}, requests); err == nil {
+		t.Fatal("invalid later task should roll back the subscription edit and earlier task")
+	}
+	subscriptions, err := store.ListSubscriptions(ctx)
+	if err != nil || len(subscriptions) != 1 || subscriptions[0]["url"] != "https://old.example/rss" {
+		t.Fatalf("failed transaction changed subscription: %#v, %v", subscriptions, err)
+	}
+	job, err := store.ClaimJob(ctx, "test", time.Now().Add(time.Second), time.Minute)
+	if err != nil || job != nil {
+		t.Fatalf("failed transaction retained task: %#v, %v", job, err)
 	}
 }
 

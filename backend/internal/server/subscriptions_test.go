@@ -255,6 +255,102 @@ func TestSetSubscriptionPatchesProvidedFieldsAgainstConcurrentProgress(t *testin
 	}
 }
 
+func TestSetSubscriptionRSSURLEnqueuesRefreshWithoutLosingProgress(t *testing.T) {
+	ctx := context.Background()
+	store, err := storage.Open(filepath.Join(t.TempDir(), "state.db"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	if err := store.PutSubscription(ctx, map[string]any{
+		"id": "target", "title": "作品", "season": 1, "url": "https://old.example/rss", "enable": true,
+		"currentEpisodeNumber": 2, "lastDownloadTime": 100,
+	}); err != nil {
+		t.Fatal(err)
+	}
+	wrapped := &listInterleavingStore{Store: store}
+	api, err := server.New(ctx, wrapped)
+	if err != nil {
+		t.Fatal(err)
+	}
+	wrapped.afterList = func() {
+		if err := store.UpdateSubscriptionFields(ctx, "target", map[string]any{
+			"currentEpisodeNumber": 8, "lastDownloadTime": 800,
+		}); err != nil {
+			t.Error(err)
+		}
+	}
+	if err := api.UpdateSubscription(ctx, map[string]any{
+		"id": "target", "title": "作品", "season": 1, "url": "https://new.example/rss",
+	}, false); err != nil {
+		t.Fatal(err)
+	}
+	items, err := store.ListSubscriptions(ctx)
+	if err != nil || len(items) != 1 {
+		t.Fatalf("subscriptions = %#v, %v", items, err)
+	}
+	if items[0]["url"] != "https://new.example/rss" || items[0]["currentEpisodeNumber"] != float64(8) || items[0]["lastDownloadTime"] != float64(800) {
+		t.Fatalf("RSS edit lost its URL or concurrent progress: %#v", items[0])
+	}
+	job, err := store.ClaimJob(ctx, "test", time.Now().Add(time.Second), time.Minute)
+	if err != nil || job == nil || job.Kind != "rss-refresh" {
+		t.Fatalf("RSS edit job = %#v, %v", job, err)
+	}
+	var payload map[string]any
+	if err := json.Unmarshal(job.Payload, &payload); err != nil || payload["subscriptionId"] != "target" || payload["automatic"] != false {
+		t.Fatalf("RSS edit payload = %#v, %v", payload, err)
+	}
+}
+
+func TestMoveSubscriptionAndRSSRefreshAreQueuedInOrder(t *testing.T) {
+	ctx := context.Background()
+	store, err := storage.Open(filepath.Join(t.TempDir(), "state.db"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	if err := store.PutSubscription(ctx, map[string]any{
+		"id": "moving", "title": "作品", "season": 1, "url": "https://old.example/rss", "enable": true,
+		"customDownloadPath": true, "customDownloadPathTemplate": "/old",
+		"currentEpisodeNumber": 2, "lastDownloadTime": 100,
+	}); err != nil {
+		t.Fatal(err)
+	}
+	wrapped := &listInterleavingStore{Store: store}
+	api, err := server.New(ctx, wrapped)
+	if err != nil {
+		t.Fatal(err)
+	}
+	api.SetSubscriptionPathResolver(func(_ context.Context, item map[string]any) (string, error) {
+		return item["customDownloadPathTemplate"].(string), nil
+	})
+	wrapped.afterList = func() {
+		if err := store.UpdateSubscriptionFields(ctx, "moving", map[string]any{
+			"currentEpisodeNumber": 8, "lastDownloadTime": 800,
+		}); err != nil {
+			t.Error(err)
+		}
+	}
+	if err := api.UpdateSubscription(ctx, map[string]any{
+		"id": "moving", "title": "作品", "season": 1, "url": "https://new.example/rss",
+		"customDownloadPath": true, "customDownloadPathTemplate": "/new",
+	}, true); err != nil {
+		t.Fatal(err)
+	}
+	items, err := store.ListSubscriptions(ctx)
+	if err != nil || len(items) != 1 || items[0]["currentEpisodeNumber"] != float64(8) || items[0]["lastDownloadTime"] != float64(800) {
+		t.Fatalf("move edit lost current progress: %#v, %v", items, err)
+	}
+	first, err := store.ClaimJob(ctx, "test", time.Now().Add(time.Second), time.Minute)
+	if err != nil || first == nil || first.Kind != server.JobSubscriptionEffects {
+		t.Fatalf("first move job = %#v, %v", first, err)
+	}
+	second, err := store.ClaimJob(ctx, "test", time.Now().Add(time.Second), time.Minute)
+	if err != nil || second == nil || second.Kind != "rss-refresh" {
+		t.Fatalf("second refresh job = %#v, %v", second, err)
+	}
+}
+
 func TestBatchEnablePatchesOnlySelectedEnableFields(t *testing.T) {
 	app, store, closeStore := newPersistentServer(t)
 	defer closeStore()

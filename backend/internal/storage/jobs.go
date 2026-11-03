@@ -24,17 +24,24 @@ UPDATE jobs SET state='resolved', owner='', lease_until=0, last_error='黑名单
 const jobColumns = `id,kind,job_key,payload,state,attempts,owner,last_error,available_at,lease_until`
 
 func (s *Store) EnqueueJob(ctx context.Context, kind, key string, payload json.RawMessage) (jobs.Job, error) {
-	if kind == "" || key == "" || !json.Valid(payload) {
-		return jobs.Job{}, errors.New("任务类型、业务键和 JSON 内容不能为空")
-	}
-	hash := sha256.Sum256([]byte(kind + "\x00" + key))
-	id := hex.EncodeToString(hash[:])
-	now := time.Now().UnixMilli()
-	_, err := s.db.ExecContext(ctx, `INSERT INTO jobs(id,kind,job_key,payload,state,available_at,created_at) VALUES(?,?,?,?,'pending',?,?) ON CONFLICT(kind,job_key) DO NOTHING`, id, kind, key, []byte(payload), now, now)
-	if err != nil {
+	request := jobs.EnqueueRequest{Kind: kind, Key: key, Payload: payload}
+	if err := enqueueJob(ctx, s.db, request); err != nil {
 		return jobs.Job{}, fmt.Errorf("保存任务：%w", err)
 	}
-	return s.GetJob(ctx, id)
+	hash := sha256.Sum256([]byte(kind + "\x00" + key))
+	return s.GetJob(ctx, hex.EncodeToString(hash[:]))
+}
+
+func enqueueJob(ctx context.Context, exec interface {
+	ExecContext(context.Context, string, ...any) (sql.Result, error)
+}, request jobs.EnqueueRequest) error {
+	if request.Kind == "" || request.Key == "" || !json.Valid(request.Payload) {
+		return errors.New("任务类型、业务键和 JSON 内容不能为空")
+	}
+	hash := sha256.Sum256([]byte(request.Kind + "\x00" + request.Key))
+	now := time.Now().UnixMilli()
+	_, err := exec.ExecContext(ctx, `INSERT INTO jobs(id,kind,job_key,payload,state,available_at,created_at) VALUES(?,?,?,?,'pending',?,?) ON CONFLICT(kind,job_key) DO NOTHING`, hex.EncodeToString(hash[:]), request.Kind, request.Key, []byte(request.Payload), now, now)
+	return err
 }
 
 func (s *Store) GetJob(ctx context.Context, id string) (jobs.Job, error) {

@@ -15,6 +15,13 @@ func (s *Store) UpdateSubscriptionFields(ctx context.Context, id string, fields 
 		return err
 	}
 	defer tx.Rollback()
+	if err := patchSubscriptionFields(ctx, tx, id, fields); err != nil {
+		return err
+	}
+	return tx.Commit()
+}
+
+func patchSubscriptionFields(ctx context.Context, tx *sql.Tx, id string, fields map[string]any) error {
 	var raw []byte
 	if err := tx.QueryRowContext(ctx, `SELECT value FROM subscriptions WHERE id=?`, id).Scan(&raw); err != nil {
 		return fmt.Errorf("读取待更新订阅：%w", err)
@@ -28,14 +35,14 @@ func (s *Store) UpdateSubscriptionFields(ctx context.Context, id string, fields 
 			item[key] = value
 		}
 	}
-	raw, err = json.Marshal(runtimeSubscription(item))
+	raw, err := json.Marshal(runtimeSubscription(item))
 	if err != nil {
 		return err
 	}
 	if _, err := tx.ExecContext(ctx, `UPDATE subscriptions SET value=? WHERE id=?`, raw, id); err != nil {
 		return err
 	}
-	return tx.Commit()
+	return nil
 }
 
 // UpdateSubscriptionFieldsBatch 原子更新选中的订阅字段，保留其他当前字段。

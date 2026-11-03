@@ -4,6 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"strings"
+
+	"github.com/jqtmviyu/MyAnimeGo/backend/internal/jobs"
 )
 
 const JobSubscriptionEffects = "subscription-effects"
@@ -46,15 +49,45 @@ func (s *Server) saveSubscriptionEffects(ctx context.Context, items []map[string
 	if !ok {
 		return errors.New("订阅变更需要持久任务存储")
 	}
-	payload, err := json.Marshal(effect)
+	request, err := subscriptionEffectsRequest(effect)
 	if err != nil {
 		return err
+	}
+	return store.ReplaceSubscriptionsAndEnqueue(ctx, items, request.Kind, request.Key, request.Payload)
+}
+
+func subscriptionEffectsRequest(effect SubscriptionEffects) (jobs.EnqueueRequest, error) {
+	payload, err := json.Marshal(effect)
+	if err != nil {
+		return jobs.EnqueueRequest{}, err
 	}
 	key, err := randomString(16)
 	if err != nil {
-		return err
+		return jobs.EnqueueRequest{}, err
 	}
-	return store.ReplaceSubscriptionsAndEnqueue(ctx, items, JobSubscriptionEffects, "subscription-effects:"+key, payload)
+	return jobs.EnqueueRequest{Kind: JobSubscriptionEffects, Key: "subscription-effects:" + key, Payload: payload}, nil
+}
+
+func subscriptionRefreshRequest(subscriptionID string) (jobs.EnqueueRequest, error) {
+	payload, err := json.Marshal(map[string]any{"subscriptionId": subscriptionID, "automatic": false})
+	if err != nil {
+		return jobs.EnqueueRequest{}, err
+	}
+	key, err := randomString(16)
+	if err != nil {
+		return jobs.EnqueueRequest{}, err
+	}
+	return jobs.EnqueueRequest{Kind: "rss-refresh", Key: "subscription-updated:" + key, Payload: payload}, nil
+}
+
+func (s *Server) updateSubscriptionFieldsAndEnqueue(ctx context.Context, id string, fields map[string]any, requests []jobs.EnqueueRequest) error {
+	store, ok := s.store.(interface {
+		UpdateSubscriptionFieldsAndEnqueue(context.Context, string, map[string]any, []jobs.EnqueueRequest) error
+	})
+	if !ok {
+		return errors.New("修改订阅需要原子保存字段和后台任务")
+	}
+	return store.UpdateSubscriptionFieldsAndEnqueue(ctx, id, fields, requests)
 }
 
 // UpdateSubscription 保留进度，按用户选择持久记录媒体迁移意图。
@@ -96,18 +129,19 @@ func (s *Server) UpdateSubscription(ctx context.Context, provided map[string]any
 			return errors.New("订阅标题重复")
 		}
 	}
-	items[index] = item
-	if !move {
-		fields := make(map[string]any, len(provided)+2)
-		for key, value := range provided {
-			if value != nil && key != "id" && key != "currentEpisodeNumber" && key != "lastDownloadTime" {
-				fields[key] = item[key]
-			}
+
+	fields := make(map[string]any, len(provided)+2)
+	for key, value := range provided {
+		if value != nil && key != "id" && key != "currentEpisodeNumber" && key != "lastDownloadTime" {
+			fields[key] = item[key]
 		}
-		if _, titleChanged := provided["title"]; titleChanged {
-			full, initials := pinyinTitle(text(item["title"]))
-			fields["pinyin"], fields["pinyinInitials"] = full, initials
-		}
+	}
+	if _, titleChanged := provided["title"]; titleChanged {
+		full, initials := pinyinTitle(text(item["title"]))
+		fields["pinyin"], fields["pinyinInitials"] = full, initials
+	}
+	sourceChanged := boolean(item["enable"]) && subscriptionRSSSourcesChanged(old, item)
+	if !move && !sourceChanged {
 		store, ok := s.store.(interface {
 			UpdateSubscriptionFields(context.Context, string, map[string]any) error
 		})
@@ -116,15 +150,65 @@ func (s *Server) UpdateSubscription(ctx context.Context, provided map[string]any
 		}
 		return store.UpdateSubscriptionFields(ctx, text(item["id"]), fields)
 	}
-	before, err := s.freezeSubscriptionPath(ctx, old)
-	if err != nil {
-		return err
+
+	requests := make([]jobs.EnqueueRequest, 0, 2)
+	if move {
+		before, err := s.freezeSubscriptionPath(ctx, old)
+		if err != nil {
+			return err
+		}
+		after, err := s.freezeSubscriptionPath(ctx, item)
+		if err != nil {
+			return err
+		}
+		request, err := subscriptionEffectsRequest(SubscriptionEffects{Action: "move", Old: before, New: after})
+		if err != nil {
+			return err
+		}
+		requests = append(requests, request)
 	}
-	after, err := s.freezeSubscriptionPath(ctx, item)
-	if err != nil {
-		return err
+	if sourceChanged {
+		request, err := subscriptionRefreshRequest(text(item["id"]))
+		if err != nil {
+			return err
+		}
+		requests = append(requests, request)
 	}
-	return s.saveSubscriptionEffects(ctx, items, SubscriptionEffects{Action: "move", Old: before, New: after})
+	return s.updateSubscriptionFieldsAndEnqueue(ctx, text(item["id"]), fields, requests)
+}
+
+func subscriptionRSSSourcesChanged(old, updated map[string]any) bool {
+	oldURLs := subscriptionRSSURLs(old)
+	newURLs := subscriptionRSSURLs(updated)
+	if len(oldURLs) != len(newURLs) {
+		return true
+	}
+	for index := range oldURLs {
+		if oldURLs[index] != newURLs[index] {
+			return true
+		}
+	}
+	return false
+}
+
+func subscriptionRSSURLs(subscription map[string]any) []string {
+	urls := []string{strings.TrimSpace(text(subscription["url"]))}
+	appendStandby := func(entries []any) {
+		for _, entry := range entries {
+			if source, ok := entry.(map[string]any); ok {
+				urls = append(urls, strings.TrimSpace(text(source["url"])))
+			}
+		}
+	}
+	switch entries := subscription["standbyRssList"].(type) {
+	case []any:
+		appendStandby(entries)
+	case []map[string]any:
+		for _, source := range entries {
+			urls = append(urls, strings.TrimSpace(text(source["url"])))
+		}
+	}
+	return urls
 }
 
 // DeleteSubscriptions 保存删除前快照，再让工作者清理缓存与用户选择的媒体。
